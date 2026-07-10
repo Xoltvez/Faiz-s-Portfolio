@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const skipPreloader = urlParams.get("skip") === "1";
 
   if (skipPreloader) {
+    // Clean up URL to remove ?skip=1
+    window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
     if (preloader) preloader.style.display = "none";
     if (ptPanel) {
       gsap.to(ptPanel, {

@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       delay: 0.8
     });
     // Clean up URL to remove ?skip=1
-    window.history.replaceState({}, document.title, window.location.pathname);
+    window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
   } else {
     const counterElement = document.getElementById("counter");
     let count = 0;
