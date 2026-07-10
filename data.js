@@ -1,10 +1,10 @@
 export const projectsData = [
   {
     title: "MACABAE",
-    date: "Juni 2026",
+    date: "June 2026",
     role: "UI/UX & Backend Dev",
     description:
-      "Pengembangan aplikasi perpustakaan untuk memudahkan peminjaman dan pengelolaan buku secara digital.",
+      "Development of a library application to facilitate digital book borrowing and management.",
     image: "/macabae/macabae.png",
     mockupType: "laptop",
     detailImages: [
@@ -15,10 +15,10 @@ export const projectsData = [
   },
   {
     title: "HEMATCUY",
-    date: "Juni 2026",
+    date: "June 2026",
     role: "Fullstack Laravel",
     description:
-      "Pengembangan website pengelolaan keuangan pribadi untuk pelacakan pemasukan dan pengeluaran.",
+      "Development of a personal finance management website for tracking income and expenses.",
     image: "/hematcuy/hematcuy1.png",
     mockupType: "laptop",
     detailImages: ["/hematcuy/hematcuy2.png"],
@@ -28,7 +28,7 @@ export const projectsData = [
     date: "April 2026",
     role: "UI/UX & QA",
     description:
-      "Perancangan antarmuka dan pengujian kualitas aplikasi logistik untuk transportasi pengiriman barang.",
+      "Interface design and quality testing of a logistics application for freight transportation.",
     image: "/taksibarang/taksibarang.png",
     mockupType: "phone",
     detailImages: [
@@ -36,14 +36,13 @@ export const projectsData = [
       "/taksibarang/taksibarang2.png",
       "/taksibarang/taksibarang3.png",
     ],
-    image: "/taksibarang/taksibarang.png",
   },
   {
     title: "THRIFTSPACE",
-    date: "Mei 2026",
+    date: "May 2026",
     role: "UI/UX Designer",
     description:
-      "Merancang desain antarmuka dan pengalaman pengguna untuk aplikasi marketplace thrifting pakaian.",
+      "Designing user interface and user experience for a clothing thrift marketplace application.",
     image:
       "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop",
     mockupType: "phone",
@@ -55,9 +54,9 @@ export const projectsData = [
   },
   {
     title: "NEXUS APP",
-    date: "Juli 2026",
+    date: "July 2026",
     role: "Frontend Developer",
-    description: "Pengembangan dashboard analitik untuk perusahaan e-commerce berskala besar.",
+    description: "Development of an analytics dashboard for a large-scale e-commerce company.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
     mockupType: "laptop",
     detailImages: [
@@ -66,9 +65,9 @@ export const projectsData = [
   },
   {
     title: "FOODIE",
-    date: "Agustus 2026",
+    date: "August 2026",
     role: "UI/UX Designer",
-    description: "Desain aplikasi pemesanan makanan berbasis lokasi dengan fitur pelacakan kurir.",
+    description: "Design of a location-based food ordering app with courier tracking feature.",
     image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop",
     mockupType: "phone",
     detailImages: [
@@ -79,7 +78,7 @@ export const projectsData = [
     title: "VIRTUAL X",
     date: "September 2026",
     role: "Fullstack Developer",
-    description: "Website company profile untuk startup teknologi Virtual Reality dengan animasi interaktif.",
+    description: "Company profile website for a Virtual Reality tech startup with interactive animations.",
     image: "https://images.unsplash.com/photo-1622979135225-d33d3b75ab9e?q=80&w=800&auto=format&fit=crop",
     mockupType: "laptop",
     detailImages: [
@@ -88,9 +87,9 @@ export const projectsData = [
   },
   {
     title: "HEALTH CARE",
-    date: "Oktober 2026",
+    date: "October 2026",
     role: "UI/UX & QA",
-    description: "Desain dan pengujian sistem antrean rumah sakit untuk mempercepat layanan pasien.",
+    description: "Design and testing of a hospital queue system to accelerate patient services.",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop",
     mockupType: "phone",
     detailImages: [
@@ -101,7 +100,7 @@ export const projectsData = [
     title: "GREEN HOME",
     date: "November 2026",
     role: "Frontend Developer",
-    description: "Aplikasi e-commerce khusus untuk produk ramah lingkungan dan alat-alat berkebun.",
+    description: "E-commerce app specifically for eco-friendly products and gardening tools.",
     image: "https://images.unsplash.com/photo-1416879572622-cce7747e0996?q=80&w=800&auto=format&fit=crop",
     mockupType: "laptop",
     detailImages: [
@@ -110,9 +109,9 @@ export const projectsData = [
   },
   {
     title: "E-LEARN",
-    date: "Desember 2026",
+    date: "December 2026",
     role: "Fullstack Developer",
-    description: "Platform belajar online (LMS) yang dilengkapi video course, kuis interaktif, dan sertifikat.",
+    description: "Online learning platform (LMS) featuring video courses, interactive quizzes, and certificates.",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
     mockupType: "laptop",
     detailImages: [
