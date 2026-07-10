@@ -19,6 +19,11 @@
         document.documentElement.classList.add("page-returning");
       }
     </script>
+    <!-- Synchronous Theme Initialization -->
+    <script>
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
   </head>
   <body>
     <!-- Preloader -->
