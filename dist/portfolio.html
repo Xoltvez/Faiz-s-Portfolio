@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo faiz.png" />
+    <title>Portfolio - Faiz's Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Synchronous: instantly cover screen if returning from project page -->
+    <script>
+      if (window.location.search.includes("skip=1")) {
+        document.documentElement.classList.add("page-returning");
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/portfolio-D8yjKFia.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/data-BEzoEWqM.js">
+    <link rel="stylesheet" crossorigin href="/assets/data-DhOPOipl.css">
+  </head>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-wrapper">
+      <div class="cursor"></div>
+    </div>
+
+    <!-- Project Hover Preview (Dennis Snellenberg Style) -->
+    <div class="project-preview-wrapper">
+      <div class="project-preview-img"></div>
+      <div class="project-preview-view"><p>View</p></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/index.html?skip=1" class="logo">FAIZ AZZAHRA.</a>
+        <div class="nav-links">
+          <a href="/index.html?skip=1#home" class="hover-target">HOME</a>
+          <a href="/index.html?skip=1#about" class="hover-target">ABOUT</a>
+          <a href="/portfolio.html" class="hover-target">PORTFOLIO</a>
+          <a href="/index.html?skip=1#contact" class="hover-target">CONTACT</a>
+          <button
+            id="theme-toggle"
+            class="theme-btn hover-target"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              id="theme-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Wrapped for Lenis -->
+    <main id="smooth-wrapper">
+      <div id="smooth-content">
+
+        <!-- Work Hero Section -->
+        <section class="work-page-hero section">
+          <div class="container">
+            <h1 class="work-hero-title reveal-text">Creating next level <br> digital products</h1>
+            
+            <!-- Filters & View Toggle Bar -->
+            <div class="portfolio-controls reveal-text">
+              <div class="portfolio-filters">
+                <button class="filter-btn active hover-target" data-filter="all">All</button>
+                <button class="filter-btn hover-target" data-filter="design">Design <sup>3</sup></button>
+                <button class="filter-btn hover-target" data-filter="development">Development <sup>7</sup></button>
+              </div>
+              <div class="portfolio-views">
+                <button class="view-btn hover-target" data-view="list" aria-label="List View">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+                <button class="view-btn active hover-target" data-view="grid" aria-label="Grid View">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Grid Section -->
+        <section class="work-grid-section section">
+          <div class="container">
+            <div class="work-grid" id="work-grid">
+              <!-- Dynamically populated from data.js via portfolio.js -->
+            </div>
+            
+            <div class="work-list" id="work-list" style="display: none;">
+              <div class="work-list-header">
+                <div class="col-client">CLIENT</div>
+                <div class="col-location">LOCATION</div>
+                <div class="col-services">SERVICES</div>
+                <div class="col-year">YEAR</div>
+              </div>
+              <div class="work-list-body" id="work-list-body">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="footer section">
+          <div class="container">
+            <div class="footer-top">
+              <h2 class="footer-title reveal-text">Let's build<br />together.</h2>
+              <div class="footer-cta reveal-text">
+                <a href="mailto:faizzz@example.com" class="footer-email hover-target"
+                  >faizzz@example.com</a
+                >
+                <div class="footer-socials">
+                  <a href="#" class="hover-target">Instagram</a>
+                  <a href="#" class="hover-target">LinkedIn</a>
+                  <a href="#" class="hover-target">Dribbble</a>
+                </div>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p>&copy; 2026 Faiz Az-Zahra. All Rights Reserved.</p>
+              <p>Designed with passion.</p>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+
+    <!-- Page Transition Panel -->
+    <div class="pt-panel"></div>
+
+  </body>
+</html>

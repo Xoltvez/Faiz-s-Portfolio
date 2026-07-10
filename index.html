@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo faiz.png" />
+    <title>Faiz's Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Synchronous: instantly cover screen if returning from project page -->
+    <script>
+      if (window.location.search.includes("skip=1")) {
+        document.documentElement.classList.add("page-returning");
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader-content">
+        <h3 class="preloader-title">
+          Faiz Az-Zahra <br />
+          Portofolio &copy;2026
+        </h3>
+        <div class="preloader-counter">
+          <span id="counter">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-wrapper">
+      <div class="cursor"></div>
+    </div>
+
+    <!-- Project Hover Preview (Dennis Snellenberg Style) -->
+    <div class="project-preview-wrapper">
+      <div class="project-preview-img"></div>
+      <div class="project-preview-view"><p>View</p></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="#home" class="logo">FAIZ AZZAHRA.</a>
+        <div class="nav-links">
+          <a href="#home" class="hover-target">HOME</a>
+          <a href="#about" class="hover-target">ABOUT</a>
+          <a href="./portfolio.html" class="hover-target nav-portfolio-link">PORTFOLIO</a>
+          <a href="#contact" class="hover-target">CONTACT</a>
+          <button
+            id="theme-toggle"
+            class="theme-btn hover-target"
+            aria-label="Toggle Theme"
+          >
+            <svg
+              id="theme-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Wrapped for Lenis -->
+    <main id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- Global Floating Objects -->
+        <div class="floating-objects-container">
+          <div class="floating-obj obj-1"></div>
+          <div class="floating-obj obj-3"></div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero section new-hero">
+          <!-- Cosmic Aura (Nebula Glow) -->
+          <div class="hero-nebula"></div>
+          <!-- Giant Orbit Line -->
+          <div class="hero-orbit-line"></div>
+
+          <div class="hero-content container">
+            <!-- Left Typography -->
+            <div class="hero-titles">
+              <span class="ampersand">&amp;</span>
+              <h1 class="hero-uiux hero-swap-text">UI/UX</h1>
+              <h1 class="hero-graphic hero-swap-text">GRAPHIC</h1>
+            </div>
+
+            <!-- Bottom Elements Wrapper -->
+            <div class="hero-bottom-elements">
+              <!-- Bottom Left Meta -->
+              <div class="hero-meta">
+                <div class="meta-text">
+                  <div class="meta-row">
+                    <span>UI/UX DESIGNER</span><span>WEB</span
+                    ><span>FRONTEND</span>
+                  </div>
+                  <div class="meta-row">
+                    <span>77</span><span>ANIMATION</span><span>DESIGN</span>
+                  </div>
+                  <div class="meta-row"><span>PROTOTYPING</span></div>
+                  <div class="meta-row">
+                    <span>GRAPHIC DESIGNER</span><span>2792335</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Right DESIGNER -->
+              <h1 class="hero-designer hero-swap-text">DESIGNER</h1>
+            </div>
+          </div>
+
+          <div class="hero-marquee reveal-text">
+            <div class="marquee-inner">
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+              <span
+                >UI/UX DESIGNER — BACKEND DEVELOPER — CREATIVE DESIGNER —
+                FRONTEND DEV —
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="about-me section">
+          <div class="container">
+            <div class="about-grid">
+              <div class="about-left reveal-text">
+                <p class="about-label">About Me</p>
+              </div>
+              <div class="about-right reveal-text">
+                <h2 class="about-heading">
+                  I'm a digital designer and developer focused on crafting
+                  premium, interactive web experiences that leave a lasting
+                  impression.
+                </h2>
+                <div class="about-text">
+                  <p>
+                    Bridging the gap between design and engineering, I
+                    specialize in UI/UX design, frontend development, and
+                    creating seamless user journeys. My goal is to build digital
+                    products that are not only visually stunning but also highly
+                    functional.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Galaxy Section -->
+        <section id="skills" class="skills-galaxy section">
+          <div class="container reveal-text">
+            <div class="galaxy-container">
+              <div class="galaxy">
+                <!-- Center Hole -->
+                <div class="center-hole"></div>
+
+                <!-- Orbit 1 (Inner) -->
+                <div class="orbit-ring ring-1">
+                  <div class="orbit-item item-1">
+                    <div class="counter-spin-1">
+                      <span class="stand-up"
+                        ><span class="dot"></span>UI/UX DESIGN</span
+                      >
+                    </div>
+                  </div>
+                  <div class="orbit-item item-2">
+                    <div class="counter-spin-1">
+                      <span class="stand-up"
+                        ><span class="dot"></span>USER FLOW</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Orbit 2 -->
+                <div class="orbit-ring ring-2">
+                  <div class="orbit-item item-3">
+                    <div class="counter-spin-2">
+                      <span class="stand-up"
+                        ><span class="dot"></span>PROTOTYPE</span
+                      >
+                    </div>
+                  </div>
+                  <div class="orbit-item item-4">
+                    <div class="counter-spin-2">
+                      <span class="stand-up"
+                        ><span class="dot"></span>WEB DESIGN</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Orbit 3 (Outer) -->
+                <div class="orbit-ring ring-3">
+                  <div class="orbit-item item-5">
+                    <div class="counter-spin-3">
+                      <span class="stand-up"
+                        ><span class="dot"></span>JR WEB DEVELOPER</span
+                      >
+                    </div>
+                  </div>
+                  <div class="orbit-item item-6">
+                    <div class="counter-spin-3">
+                      <span class="stand-up"
+                        ><span class="dot"></span>GRAPHIC DESIGN</span
+                      >
+                    </div>
+                  </div>
+                  <div class="orbit-item item-7">
+                    <div class="counter-spin-3">
+                      <span class="stand-up"
+                        ><span class="dot"></span>JR FRONTEND DEV</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Center Profile (2D Overlay) -->
+              <div class="galaxy-center">
+                <img
+                  src="/profile.png"
+                  alt="Faiz Az-Zahra"
+                  class="profile-img"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Project Section -->
+        <section id="project" class="experience section">
+          <div class="container">
+            <h2 class="section-title">PROJECT</h2>
+            <div class="exp-list">
+              <!-- Projects are dynamically injected here via main.js -->
+            </div>
+
+            <div class="more-work-container reveal-text">
+              <a href="/portfolio.html" class="more-work-btn hover-target"
+                >More Project <sup>10</sup></a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- All Projects Grid Section (Dennis Snellenberg Style Showcase) -->
+        <section class="projects-gallery section" id="all-projects">
+          <div class="projects-pin-container">
+            <div class="projects-horizontal-wrapper">
+              <div class="projects-track upper-track">
+                <!-- Row 1 items injected dynamically via main.js -->
+              </div>
+              <div class="projects-track lower-track">
+                <!-- Row 2 items injected dynamically via main.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <section id="contact" class="footer section">
+          <div class="container">
+            <div class="footer-top reveal-text">
+              <h2 class="huge-text hover-target">
+                <a href="mailto:faizazzahra88@gmail.com">LET'S TALK ↗</a>
+              </h2>
+            </div>
+            <div class="footer-bottom reveal-text">
+              <div class="socials">
+                <a
+                  href="https://linkedin.com/in/faizazzahrawinantoputra"
+                  class="hover-target"
+                  >LinkedIn</a
+                >
+                <a href="https://github.com/Xoltvez" class="hover-target"
+                  >Github</a
+                >
+                <a href="#" class="hover-target"></a>
+              </div>
+              <p>&copy; 2026 Faiz Az-Zahra.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="page-transition">
+      <div class="pt-panel"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo faiz.png" />
+    <title>Project Details - Faiz Az-Zahra</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-wrapper">
+      <div class="cursor"></div>
+    </div>
+
+    <div class="project-page" id="project-page">
+      <div class="project-modal-content">
+        <!-- Floating Navigation -->
+        <div class="pm-nav">
+          <div class="pm-nav-brand">FAIZ AZZAHRA.</div>
+          <button class="pm-close hover-target" id="pm-close">
+            BACK TO HOME ↗
+          </button>
+        </div>
+        
+        <!-- Dennis Snellenberg Hero Banner Frame with Parallax -->
+        <div class="pm-header-banner">
+          <div class="pm-banner-bg-wrapper">
+            <div class="pm-banner-bg" id="pm-banner-bg"></div>
+          </div>
+          <div class="pm-banner-overlay"></div>
+          
+          <h1 class="pm-banner-title" id="pm-banner-title">Project Title</h1>
+          
+          <!-- Metagrid inside the banner -->
+          <div class="pm-banner-meta">
+            <div class="pm-meta-grid">
+              <div class="pm-meta-item">
+                <span class="pm-col-label">Role</span>
+                <span class="pm-col-value" id="pm-role">Frontend development</span>
+              </div>
+              <div class="pm-meta-item">
+                <span class="pm-col-label">Year</span>
+                <span class="pm-col-value" id="pm-year">2025</span>
+              </div>
+              <div class="pm-meta-item pm-meta-desc">
+                <span class="pm-col-label">Description</span>
+                <span class="pm-col-value" id="pm-desc">A website that celebrates the stars.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pm-image-wrapper" id="pm-image-wrapper">
+          <!-- Dynamic images will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition page-transition--covered" id="page-transition">
+      <div class="pt-panel"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/project.js"></script>
+  </body>
+</html>
