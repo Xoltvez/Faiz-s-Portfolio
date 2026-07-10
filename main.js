@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       const year = project.date.split(" ")[1] || project.date;
       
       const cardHTML = `
-        <a href="/project.html?id=${index}" class="gallery-card hover-target reveal-text" data-index="${index}">
+        <a href="/project?id=${index}" class="gallery-card hover-target reveal-text" data-index="${index}">
           <div class="gallery-card-image-wrapper" style="background-color: ${bgColor};">
             <img src="${project.image}" alt="${project.title} Preview" class="gallery-card-img" loading="lazy" />
           </div>
@@ -491,10 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       
       let targetUrl;
       if (item.classList.contains("more-work-btn") || item.classList.contains("nav-portfolio-link")) {
-        targetUrl = "/portfolio.html?skip=1";
+        targetUrl = "/portfolio?skip=1";
       } else {
         const index = item.getAttribute("data-index");
-        targetUrl = `/project.html?id=${index}`;
+        targetUrl = `/project?id=${index}`;
       }
 
       // Slide sweep panel naik dari bawah untuk menutup layar, lalu navigasi
