@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gridHTML += `
         <a href="/project?id=${index}" class="work-card hover-target reveal-text" data-index="${index}">
           <div class="work-card-image-wrapper">
-            <img src="${project.image}" alt="${project.title}" class="work-card-img" loading="lazy" />
+            ${project.image ? `<img src="${project.image}" alt="${project.title}" class="work-card-img" loading="lazy" />` : ''}
           </div>
           <div class="work-card-meta">
             <h3 class="work-card-title">${project.title}</h3>
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       
       listHTML += `
-        <a href="/project?id=${index}" class="work-list-row hover-target" data-index="${index}" data-image="${project.image}">
+        <a href="/project?id=${index}" class="work-list-row hover-target" data-index="${index}" data-image="${project.image || ''}">
           <div class="col-client">${project.title}</div>
           <div class="col-location">Indonesia</div>
           <div class="col-services">${project.role}</div>

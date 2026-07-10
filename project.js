@@ -34,17 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set background image of the header banner
     const bannerBg = document.getElementById("pm-banner-bg");
     if (bannerBg) {
-      bannerBg.style.backgroundImage = `url(${project.image})`;
+      if (project.image) {
+        bannerBg.style.backgroundImage = `url(${project.image})`;
+      } else {
+        bannerBg.style.backgroundImage = "none";
+      }
     }
 
     // Set dynamic screenshots: first one is inside a Laptop Mockup, the rest are normal flat images
     const pmImageWrapper = document.getElementById("pm-image-wrapper");
     pmImageWrapper.innerHTML = "";
     
-    const imagesToRender =
+    let imagesToRender =
       project.detailImages && project.detailImages.length > 0
         ? project.detailImages
-        : [project.image];
+        : (project.image ? [project.image] : []);
+        
+    // Filter out empty strings
+    imagesToRender = imagesToRender.filter(img => img);
 
     const mockupType = project.mockupType || "laptop";
 

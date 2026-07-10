@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       const cardHTML = `
         <a href="/project?id=${index}" class="gallery-card hover-target reveal-text" data-index="${index}">
           <div class="gallery-card-image-wrapper" style="background-color: ${bgColor};">
-            <img src="${project.image}" alt="${project.title} Preview" class="gallery-card-img" loading="lazy" />
+            ${project.image ? `<img src="${project.image}" alt="${project.title} Preview" class="gallery-card-img" loading="lazy" />` : ''}
           </div>
           <div class="gallery-card-meta">
             <div class="gallery-card-header">
