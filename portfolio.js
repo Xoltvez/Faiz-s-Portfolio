@@ -117,10 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
       viewY = lerp(viewY, mouseY, 0.15);
       
       currentScrollVelocity = lerp(currentScrollVelocity, 0, 0.1);
-      let rotate = currentScrollVelocity * 0.2;
-      let skew = currentScrollVelocity * 0.1;
 
-      projectWrapper.style.transform = `translate(${previewX}px, ${previewY}px) rotate(${rotate}deg) skewX(${skew}deg)`;
+      gsap.set(projectWrapper, {
+        x: previewX,
+        y: previewY,
+        xPercent: -50,
+        yPercent: -50
+      });
       if (projectView) projectView.style.transform = `translate(${viewX - previewX}px, ${viewY - previewY}px)`;
     }
 

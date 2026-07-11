@@ -303,9 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
         x: previewX,
         y: previewY,
         xPercent: -50,
-        yPercent: -50,
-        rotation: rotate,
-        skewY: skew,
+        yPercent: -50
       });
       gsap.set(projectView, { x: viewX - previewX, y: viewY - previewY });
 
