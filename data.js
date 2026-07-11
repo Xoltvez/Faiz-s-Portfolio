@@ -61,13 +61,13 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "MAINTENANCE",
-    date: "August 2026",
-    role: "UI/UX Designer",
+    title: "Next Design",
+    date: "Desember 2024",
+    role: "Graphic Designer",
     description:
       "Design of a location-based food ordering app with courier tracking feature.",
-    image: "",
-    mockupType: "phone",
+    image: "nextdesign/nextdesign.png",
+    mockupType: "laptop",
     detailImages: [],
   },
   {
