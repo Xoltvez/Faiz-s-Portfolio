@@ -1629,11 +1629,15 @@ a {
     overflow: visible;
     display: block;
   }
+  .projects-pin-container {
+    height: auto !important;
+  }
   .projects-horizontal-wrapper {
     padding: 4rem 1.5rem;
     width: 100%;
+    align-items: center;
   }
-  .projects-grid-horizontal {
+  .projects-track {
     flex-direction: column;
     width: 100%;
     gap: 3.5rem;
