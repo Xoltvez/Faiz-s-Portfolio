@@ -1302,6 +1302,45 @@ a {
   min-height: 80vh;
 }
 
+/* Footer Spheres */
+.footer-spheres {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.footer-obj {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: floatSimple 6s ease-in-out infinite alternate;
+}
+@keyframes floatSimple {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-15px); }
+}
+.f-obj-1 {
+  width: 70px; height: 70px;
+  background: radial-gradient(circle at 30% 30%, #4db8ff, var(--accent-color) 60%, #002233);
+  box-shadow: inset -8px -8px 15px rgba(0,0,0,0.4), 5px 10px 15px rgba(0,0,0,0.2);
+  top: 15%; left: 5%;
+}
+.f-obj-2 {
+  width: 15px; height: 15px;
+  background: radial-gradient(circle at 30% 30%, #4db8ff, var(--accent-color) 60%, #002233);
+  box-shadow: inset -2px -2px 5px rgba(0,0,0,0.4), 2px 5px 8px rgba(0,0,0,0.2);
+  top: 10%; left: 22%;
+  animation-delay: -2s;
+}
+.f-obj-3 {
+  width: 20px; height: 20px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #888888 60%, #222222);
+  box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), 3px 5px 10px rgba(0,0,0,0.3);
+  bottom: 25%; left: 30%;
+  animation-delay: -4s;
+}
+
 .footer-top {
   margin-bottom: 5rem;
   text-align: center;
@@ -1322,6 +1361,14 @@ a {
   border-top: 1px solid var(--border-color);
   padding-top: 2rem;
   color: var(--text-secondary);
+}
+
+.footer-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: -1;
+  opacity: 0.5;
 }
 
 .socials {
