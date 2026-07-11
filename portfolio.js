@@ -201,7 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
     projectsData.forEach((project, index) => {
       const roleLower = project.role.toLowerCase();
       let category = "development";
-      if (roleLower.includes("ui") || roleLower.includes("ux") || roleLower.includes("design") || roleLower.includes("qa")) {
+      if (roleLower.includes("ui") || roleLower.includes("ux")) {
+        category = "ui-ux";
+      } else if (roleLower.includes("design") || roleLower.includes("graphic") || roleLower.includes("qa")) {
         category = "design";
       }
       
@@ -241,15 +243,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Calculate dynamic project counts
+  const uiuxCount = projectsData.filter(p => {
+    const roleLower = p.role.toLowerCase();
+    return roleLower.includes("ui") || roleLower.includes("ux");
+  }).length;
   const designCount = projectsData.filter(p => {
     const roleLower = p.role.toLowerCase();
-    return roleLower.includes("ui") || roleLower.includes("ux") || roleLower.includes("design") || roleLower.includes("qa");
+    return !roleLower.includes("ui") && !roleLower.includes("ux") && (roleLower.includes("design") || roleLower.includes("graphic") || roleLower.includes("qa"));
   }).length;
-  const devCount = projectsData.length - designCount;
+  const devCount = projectsData.length - (uiuxCount + designCount);
 
+  const uiuxBtn = document.querySelector('[data-filter="ui-ux"]');
   const designBtn = document.querySelector('[data-filter="design"]');
   const devBtn = document.querySelector('[data-filter="development"]');
-  if (designBtn) designBtn.innerHTML = `UI/UX Design <sup>${designCount}</sup>`;
+  
+  if (uiuxBtn) uiuxBtn.innerHTML = `UI/UX Design <sup>${uiuxCount}</sup>`;
+  if (designBtn) designBtn.innerHTML = `Design <sup>${designCount}</sup>`;
   if (devBtn) devBtn.innerHTML = `Development <sup>${devCount}</sup>`;
 
   // Initial render
