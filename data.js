@@ -5,6 +5,7 @@ export const projectsData = [
     role: "UI/UX & Backend Dev",
     description:
       "Development of a library application to facilitate digital book borrowing and management.",
+    link: "",
     image: "/macabae/macabae.png",
     mockupType: "laptop",
     detailImages: [
@@ -19,6 +20,7 @@ export const projectsData = [
     role: "Fullstack Laravel",
     description:
       "Development of a personal finance management website for tracking income and expenses.",
+    link: "https://www.hematcuy.com",
     image: "/hematcuy/hematcuy1.png",
     mockupType: "laptop",
     detailImages: ["/hematcuy/hematcuy2.png"],
@@ -57,6 +59,7 @@ export const projectsData = [
     role: "Graphic Designer",
     description:
       "Development of an analytics dashboard for a large-scale e-commerce company.",
+    link: "https://www.instagram.com/akura.partyplanner/",
     image: "akurapartyplanner/akurapartyplanner.png",
     detailImages: [],
   },
@@ -66,6 +69,7 @@ export const projectsData = [
     role: "Graphic Designer",
     description:
       "Design of a location-based food ordering app with courier tracking feature.",
+    link: "https://www.instagram.com/next.design.id/",
     image: "nextdesign/nextdesign.png",
     mockupType: "laptop",
     detailImages: [],
@@ -76,17 +80,18 @@ export const projectsData = [
     role: "Graphic Designer",
     description:
       "Company profile website for a Virtual Reality tech startup with interactive animations.",
+    link: "https://www.instagram.com/jerujinspirasi_/",
     image: "jerujiinspirasi/jerujiinspirasi.png",
     detailImages: [],
   },
   {
-    title: "MAINTENANCE",
+    title: "INTERNSHIP HUMIC ENGENEERING",
     date: "October 2026",
-    role: "UI/UX & QA",
+    role: "Multimedia Designer",
     description:
       "Design and testing of a hospital queue system to accelerate patient services.",
-    image: "",
-    mockupType: "phone",
+    image: "humic/humic.png",
+    mockupType: "laptop",
     detailImages: [],
   },
   {
