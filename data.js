@@ -55,7 +55,7 @@ export const projectsData = [
   },
   {
     title: "Akura Party Planner",
-    date: "July 2026",
+    date: "November 2025",
     role: "Graphic Designer",
     description:
       "Akura Party Planner is an event decoration service provider for parties, anniversaries, and birthdays. I designed the Instagram feed for Akura Party Planner.",
@@ -76,7 +76,7 @@ export const projectsData = [
   },
   {
     title: "Jeruji Inspirasi",
-    date: "Desember 2025",
+    date: "November 2025",
     role: "Graphic Designer",
     description:
       "Jeruji Inspirasi is a public relations campaign in collaboration with the Faculty of Communication Sciences at Jenderal Soedirman University, where I served as part of the creative team.",
@@ -85,8 +85,8 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "INTERNSHIP HUMIC ENGENEERING",
-    date: "October 2026",
+    title: "Internship Humic Engeneering",
+    date: "Agustus 2024",
     role: "Multimedia Designer",
     description:
       "A remote internship within the multimedia designer division, where my responsibilities included designing book covers, certificates, billboards, and other related materials.",
