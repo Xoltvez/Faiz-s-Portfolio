@@ -58,7 +58,7 @@ export const projectsData = [
     date: "July 2026",
     role: "Graphic Designer",
     description:
-      "Development of an analytics dashboard for a large-scale e-commerce company.",
+      "Akura Party Planner is an event decoration service provider for parties, anniversaries, and birthdays. I designed the Instagram feed for Akura Party Planner.",
     link: "https://www.instagram.com/akura.partyplanner/",
     image: "akurapartyplanner/akurapartyplanner.png",
     detailImages: [],
@@ -68,7 +68,7 @@ export const projectsData = [
     date: "Desember 2024",
     role: "Graphic Designer",
     description:
-      "Design of a location-based food ordering app with courier tracking feature.",
+      "Next Design is my personal Instagram account featuring basic Figma tutorials and guides on how to create components in Figma.",
     link: "https://www.instagram.com/next.design.id/",
     image: "nextdesign/nextdesign.png",
     mockupType: "laptop",
@@ -79,7 +79,7 @@ export const projectsData = [
     date: "Desember 2025",
     role: "Graphic Designer",
     description:
-      "Company profile website for a Virtual Reality tech startup with interactive animations.",
+      "Jeruji Inspirasi is a public relations campaign in collaboration with the Faculty of Communication Sciences at Jenderal Soedirman University, where I served as part of the creative team.",
     link: "https://www.instagram.com/jerujinspirasi_/",
     image: "jerujiinspirasi/jerujiinspirasi.png",
     detailImages: [],
@@ -89,7 +89,7 @@ export const projectsData = [
     date: "October 2026",
     role: "Multimedia Designer",
     description:
-      "Design and testing of a hospital queue system to accelerate patient services.",
+      "A remote internship within the multimedia designer division, where my responsibilities included designing book covers, certificates, billboards, and other related materials.",
     image: "humic/humic.png",
     mockupType: "laptop",
     detailImages: [],
@@ -99,7 +99,7 @@ export const projectsData = [
     date: "November 2023",
     role: "BackEnd Developer",
     description:
-      "E-commerce app specifically for eco-friendly products and gardening tools.",
+      "Blindpix is an innovative mobile application designed to allow users to easily and accurately test and understand their color vision capabilities.",
     image: "blindpix/blindpix.png",
     mockupType: "laptop",
     detailImages: [],
@@ -109,7 +109,7 @@ export const projectsData = [
     date: "Juli 2023",
     role: "UI/UX Designer",
     description:
-      "Online learning platform (LMS) featuring video courses, interactive quizzes, and certificates.",
+      "Reesen is a mobile travel application that assists users with their trips, including booking hotels, purchasing flight tickets, and more.",
     image: "reesen/reesen.png",
     mockupType: "laptop",
     detailImages: [],
