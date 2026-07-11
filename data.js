@@ -52,13 +52,12 @@ export const projectsData = [
     ],
   },
   {
-    title: "MAINTENANCE",
+    title: "Akura Party Planner",
     date: "July 2026",
-    role: "Frontend Developer",
+    role: "Graphic Designer",
     description:
       "Development of an analytics dashboard for a large-scale e-commerce company.",
-    image: "",
-    mockupType: "laptop",
+    image: "akurapartyplanner/akurapartyplanner.png",
     detailImages: [],
   },
   {
@@ -72,13 +71,12 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "MAINTENANCE",
-    date: "September 2026",
-    role: "Fullstack Developer",
+    title: "Jeruji Inspirasi",
+    date: "Desember 2025",
+    role: "Graphic Designer",
     description:
       "Company profile website for a Virtual Reality tech startup with interactive animations.",
-    image: "",
-    mockupType: "laptop",
+    image: "jerujiinspirasi/jerujiinspirasi.png",
     detailImages: [],
   },
   {
