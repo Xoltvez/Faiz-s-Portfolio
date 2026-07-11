@@ -7,9 +7,11 @@ function cleanUrlsPlugin() {
     name: 'clean-urls',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        // If the URL doesn't have an extension and isn't root, append .html
-        if (req.url && !req.url.includes('.') && req.url !== '/' && !req.url.startsWith('/@')) {
-          req.url += '.html';
+        const urlObj = new URL(req.url, `http://${req.headers.host}`);
+        const pathname = urlObj.pathname;
+        // If the pathname doesn't have an extension and isn't root, append .html
+        if (pathname && !pathname.includes('.') && pathname !== '/' && !pathname.startsWith('/@')) {
+          req.url = req.url.replace(pathname, pathname + '.html');
         }
         next();
       });
