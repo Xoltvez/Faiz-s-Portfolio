@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set dynamic project details
     document.getElementById("pm-banner-title").innerText = project.title;
     document.getElementById("pm-desc").innerText = project.description;
+
+    const pmLink = document.getElementById("pm-link");
+    if (pmLink) {
+      pmLink.href = project.link || "#";
+    }
     document.getElementById("pm-year").innerText = project.date;
     document.getElementById("pm-role").innerText = project.role;
 

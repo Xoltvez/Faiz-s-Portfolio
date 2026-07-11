@@ -604,7 +604,7 @@ a {
 
 .pm-meta-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 2fr 1fr;
   gap: 2rem;
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -623,6 +623,24 @@ a {
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 0.5rem;
   font-weight: 500;
+}
+
+.see-portfolio-btn {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.6rem 1.5rem;
+  background-color: var(--text-primary);
+  color: var(--bg-primary) !important;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.see-portfolio-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
 }
 
 
