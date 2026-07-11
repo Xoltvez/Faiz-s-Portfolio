@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   function attachProjectInteractions() {
     // Project Click Transition & Hover Preview
-    document.querySelectorAll(".work-card, .work-list-row").forEach((link) => {
+    document.querySelectorAll(".work-card, .exp-item").forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const targetUrl = link.getAttribute("href");
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cursor) cursor.classList.add("active");
         
         // Project preview for list view
-        if (link.classList.contains("work-list-row")) {
+        if (link.classList.contains("exp-item")) {
           const img = link.getAttribute("data-image");
           if (img && projectImg) {
             projectImg.style.backgroundImage = `url(${img})`;
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("mouseleave", () => {
         if (cursor) cursor.classList.remove("active");
         
-        if (projectWrapper && link.classList.contains("work-list-row")) {
+        if (projectWrapper && link.classList.contains("exp-item")) {
           projectWrapper.classList.remove("active");
           gsap.to(projectWrapper, { scale: 0, duration: 0.3, ease: "power2.in" });
         }
@@ -227,11 +227,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       
       listHTML += `
-        <a href="/project?id=${index}" class="work-list-row hover-target" data-index="${index}" data-image="${project.image || ''}">
-          <div class="col-client">${project.title}</div>
-          <div class="col-location">Indonesia</div>
-          <div class="col-services">${project.role}</div>
-          <div class="col-year">${year}</div>
+        <a href="/project?id=${index}" class="exp-item hover-target reveal-text" data-index="${index}" data-image="${project.image || ''}" style="text-decoration: none; color: inherit;">
+          <div class="exp-meta">
+            <span>${project.date}</span><br /><span>${project.role}</span>
+          </div>
+          <div class="exp-details">
+            <h3>${project.title}</h3>
+            <p>${project.description || ''}</p>
+          </div>
         </a>
       `;
     });
