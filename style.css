@@ -629,8 +629,8 @@ a {
   display: inline-block;
   margin-top: 0.25rem;
   padding: 0.6rem 1.5rem;
-  background-color: var(--text-primary);
-  color: var(--bg-primary) !important;
+  background-color: var(--accent-color);
+  color: #ffffff !important;
   text-decoration: none;
   border-radius: 25px;
   font-weight: 500;
