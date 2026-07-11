@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const designBtn = document.querySelector('[data-filter="design"]');
   const devBtn = document.querySelector('[data-filter="development"]');
-  if (designBtn) designBtn.innerHTML = `Design <sup>${designCount}</sup>`;
+  if (designBtn) designBtn.innerHTML = `UI/UX Design <sup>${designCount}</sup>`;
   if (devBtn) devBtn.innerHTML = `Development <sup>${devCount}</sup>`;
 
   // Initial render
