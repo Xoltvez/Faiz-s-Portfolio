@@ -203,6 +203,28 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
+    // --- NEXT PROJECT FOOTER ---
+    const nextId = (id + 1) % projectsData.length;
+    const nextProject = projectsData[nextId];
+    
+    const nextCaseTitle = document.getElementById("next-case-title");
+    const nextCaseImg = document.getElementById("next-case-img");
+    const nextCaseBtn = document.getElementById("next-case-btn");
+
+    if (nextCaseTitle && nextProject) {
+      nextCaseTitle.innerText = nextProject.title;
+    }
+    if (nextCaseImg && nextProject) {
+      if (nextProject.image) {
+        nextCaseImg.style.backgroundImage = `url(${nextProject.image})`;
+      }
+    }
+    if (nextCaseBtn) {
+      nextCaseBtn.addEventListener("click", () => {
+        navigateWithTransition(`/project?id=${nextId}`);
+      });
+    }
+
   } else {
     document.getElementById("pm-banner-title").innerText = "Project Not Found";
   }
@@ -284,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Helper function to animate page transition out and navigate
-  const navigateWithTransition = (url) => {
+  function navigateWithTransition(url) {
     // Force panel below screen
     gsap.set(ptPanel, { yPercent: 100 });
 
@@ -297,5 +319,5 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = url;
       },
     });
-  };
+  }
 });
