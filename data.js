@@ -54,7 +54,7 @@ export const projectsData = [
     ],
   },
   {
-    title: "Akura Party Planner",
+    title: "AKURA PARTY PLANNER",
     date: "November 2025",
     role: "Graphic Designer",
     description:
@@ -64,7 +64,7 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "Next Design",
+    title: "NEXT DESIGN",
     date: "Desember 2024",
     role: "Graphic Designer",
     description:
@@ -75,7 +75,7 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "Jeruji Inspirasi",
+    title: "JERUJI INSPIRASI",
     date: "November 2025",
     role: "Graphic Designer",
     description:
@@ -85,7 +85,7 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "Internship Humic Engeneering",
+    title: "INTERNSHIP HUMIC ENGENEERING",
     date: "Agustus 2024",
     role: "Multimedia Designer",
     description:
@@ -95,7 +95,7 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "BlindPix",
+    title: "BLINDPIX",
     date: "November 2023",
     role: "BackEnd Developer",
     description:
