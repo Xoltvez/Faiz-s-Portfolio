@@ -40,7 +40,7 @@ export const projectsData = [
     ],
   },
   {
-    title: "THRIFTSPACE",
+    title: "THRIFT SPACE",
     date: "May 2026",
     role: "UI/UX Designer",
     description:
