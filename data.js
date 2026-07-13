@@ -48,9 +48,9 @@ export const projectsData = [
     image: "thriftspace/thriftspace.png",
     mockupType: "phone",
     detailImages: [
-      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop",
+      "thriftspace/Onboarding.png",
+      "thriftspace/Detail Produk.png",
+      "thriftspace/Payment.png",
     ],
   },
   {
