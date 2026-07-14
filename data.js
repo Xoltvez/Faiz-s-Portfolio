@@ -114,4 +114,24 @@ export const projectsData = [
     mockupType: "laptop",
     detailImages: [],
   },
+  {
+    title: "REESEN",
+    date: "Juli 2023",
+    role: "UI/UX Designer",
+    description:
+      "Reesen is a mobile travel application that assists users with their trips, including booking hotels, purchasing flight tickets, and more.",
+    image: "reesen/reesen.png",
+    mockupType: "laptop",
+    detailImages: [],
+  },
+  {
+    title: "REESEN",
+    date: "Juli 2023",
+    role: "UI/UX Designer",
+    description:
+      "Reesen is a mobile travel application that assists users with their trips, including booking hotels, purchasing flight tickets, and more.",
+    image: "reesen/reesen.png",
+    mockupType: "laptop",
+    detailImages: [],
+  },
 ];
