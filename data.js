@@ -54,7 +54,7 @@ export const projectsData = [
     ],
   },
   {
-    title: "AKURA PARTY PLANNER",
+    title: "AKURA PLANNER",
     date: "November 2025",
     role: "Graphic Designer",
     description:
@@ -85,7 +85,7 @@ export const projectsData = [
     detailImages: [],
   },
   {
-    title: "INTERNSHIP HUMIC ENGENEERING",
+    title: "INTERNSHIP HUMIC ENGINEERING",
     date: "Agustus 2024",
     role: "Multimedia Designer",
     description:
@@ -114,24 +114,5 @@ export const projectsData = [
     mockupType: "laptop",
     detailImages: [],
   },
-  {
-    title: "REESEN",
-    date: "Juli 2023",
-    role: "UI/UX Designer",
-    description:
-      "Reesen is a mobile travel application that assists users with their trips, including booking hotels, purchasing flight tickets, and more.",
-    image: "reesen/reesen.png",
-    mockupType: "laptop",
-    detailImages: [],
-  },
-  {
-    title: "REESEN",
-    date: "Juli 2023",
-    role: "UI/UX Designer",
-    description:
-      "Reesen is a mobile travel application that assists users with their trips, including booking hotels, purchasing flight tickets, and more.",
-    image: "reesen/reesen.png",
-    mockupType: "laptop",
-    detailImages: [],
-  },
+
 ];
