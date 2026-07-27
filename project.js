@@ -20,7 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- LOAD PROJECT DATA ---
   const urlParams = new URLSearchParams(window.location.search);
   const idParam = urlParams.get("id");
-  const id = idParam !== null ? parseInt(idParam, 10) : null;
+  let id = idParam !== null ? parseInt(idParam, 10) : null;
+
+  // Extract slug from path: /portfolio/slug-name
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  let slug = null;
+  if (pathParts[0] === 'portfolio' && pathParts[1]) {
+    slug = pathParts[1];
+  }
+
+  if (slug) {
+    const foundIndex = projectsData.findIndex(p => p.slug === slug);
+    if (foundIndex !== -1) {
+      id = foundIndex;
+    }
+  }
 
   if (id !== null && !isNaN(id) && projectsData[id]) {
     const project = projectsData[id];
@@ -28,6 +42,81 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set dynamic project details
     document.getElementById("pm-banner-title").innerText = project.title;
     document.getElementById("pm-desc").innerText = project.description;
+
+    // Dynamic SEO update
+    const projectTitle = `${project.title} - Project by Faiz Az-Zahra`;
+    const projectDesc = project.description;
+    const projectUrl = `https://faizazzahra.com/portfolio/${project.slug}`;
+    const imagePath = project.image ? (project.image.startsWith('/') ? project.image : '/' + project.image) : '/profile.png';
+    const projectImg = `https://faizazzahra.com${imagePath}`;
+
+    // Update document title
+    document.title = projectTitle;
+
+    // Update canonical link
+    const canonical = document.getElementById("canonical-link");
+    if (canonical) canonical.setAttribute("href", projectUrl);
+
+    // Update meta description
+    const metaDesc = document.getElementById("meta-desc");
+    if (metaDesc) metaDesc.setAttribute("content", projectDesc);
+
+    // Update Open Graph tags
+    const ogTitle = document.getElementById("og-title");
+    if (ogTitle) ogTitle.setAttribute("content", projectTitle);
+
+    const ogDesc = document.getElementById("og-desc");
+    if (ogDesc) ogDesc.setAttribute("content", projectDesc);
+
+    const ogUrl = document.getElementById("og-url");
+    if (ogUrl) ogUrl.setAttribute("content", projectUrl);
+
+    const ogImg = document.getElementById("og-img");
+    if (ogImg) ogImg.setAttribute("content", projectImg);
+
+    // Update Twitter Card tags
+    const twitterTitle = document.getElementById("twitter-title");
+    if (twitterTitle) twitterTitle.setAttribute("content", projectTitle);
+
+    const twitterDesc = document.getElementById("twitter-desc");
+    if (twitterDesc) twitterDesc.setAttribute("content", projectDesc);
+
+    const twitterUrl = document.getElementById("twitter-url");
+    if (twitterUrl) twitterUrl.setAttribute("content", projectUrl);
+
+    const twitterImg = document.getElementById("twitter-img");
+    if (twitterImg) twitterImg.setAttribute("content", projectImg);
+
+    // Dynamic JSON-LD structured data for Project
+    let jsonLdScript = document.getElementById("project-jsonld");
+    if (!jsonLdScript) {
+      jsonLdScript = document.createElement("script");
+      jsonLdScript.id = "project-jsonld";
+      jsonLdScript.type = "application/ld+json";
+      document.head.appendChild(jsonLdScript);
+    }
+    
+    const jsonLdData = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": project.title,
+      "headline": `${project.title} - Project by Faiz Az-Zahra`,
+      "description": projectDesc,
+      "image": projectImg,
+      "url": projectUrl,
+      "dateCreated": project.date,
+      "author": {
+        "@type": "Person",
+        "name": "Faiz Az-Zahra Winanto Putra",
+        "url": "https://faizazzahra.com/"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Faiz Az-Zahra Winanto Putra",
+        "url": "https://faizazzahra.com/"
+      }
+    };
+    jsonLdScript.textContent = JSON.stringify(jsonLdData);
 
     const pmLink = document.getElementById("pm-link");
     if (pmLink) {
@@ -221,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (nextCaseBtn) {
       nextCaseBtn.addEventListener("click", () => {
-        navigateWithTransition(`/project?id=${nextId}`);
+        navigateWithTransition(`/portfolio/${nextProject.slug}`);
       });
     }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://faizazzahra.com/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Portfolio Catalog -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Project 0: MACABAE -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/macabae</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 1: HEMATCUY -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/hematcuy</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 2: TAKSI BARANG -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/taksi-barang</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 3: THRIFT SPACE -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/thrift-space</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 4: AKURA PLANNER -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/akura-planner</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 5: NEXT DESIGN -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/next-design</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 6: JERUJI INSPIRASI -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/jeruji-inspirasi</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 7: INTERNSHIP HUMIC ENGINEERING -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/internship-humic-engineering</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 8: BLINDPIX -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/blindpix</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 9: REESEN -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/reesen</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

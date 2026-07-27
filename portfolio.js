@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const year = project.date.split(" ")[1] || project.date;
       
       gridHTML += `
-        <a href="/project?id=${index}" class="work-card hover-target reveal-text" data-index="${index}">
+        <a href="/portfolio/${project.slug}" class="work-card hover-target reveal-text" data-index="${index}">
           <div class="work-card-image-wrapper">
             ${project.image ? `<img src="${project.image}" alt="${project.title}" class="work-card-img" loading="lazy" />` : ''}
           </div>
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       
       listHTML += `
-        <a href="/project?id=${index}" class="exp-item hover-target reveal-text" data-index="${index}" data-image="${project.image || ''}" style="text-decoration: none; color: inherit;">
+        <a href="/portfolio/${project.slug}" class="exp-item hover-target reveal-text" data-index="${index}" data-image="${project.image || ''}" style="text-decoration: none; color: inherit;">
           <div class="exp-meta">
             <span>${project.date}</span><br /><span>${project.role}</span>
           </div>
