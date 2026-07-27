@@ -58,8 +58,8 @@ export const projectsData = [
     ],
   },
   {
-    title: "AKURA PLANNER",
-    slug: "akura-planner",
+    title: "AKURA PARTY PLANNER",
+    slug: "akura-party-planner",
     date: "November 2025",
     role: "Graphic Designer",
     description:

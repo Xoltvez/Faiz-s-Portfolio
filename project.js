@@ -40,7 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const project = projectsData[id];
     
     // Set dynamic project details
-    document.getElementById("pm-banner-title").innerText = project.title;
+    const bannerTitle = document.getElementById("pm-banner-title");
+    bannerTitle.innerText = project.title;
+    if (project.title.length > 15) {
+      bannerTitle.classList.add("pm-title-long");
+    } else {
+      bannerTitle.classList.remove("pm-title-long");
+    }
     document.getElementById("pm-desc").innerText = project.description;
 
     // Dynamic SEO update
