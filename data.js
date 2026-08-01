@@ -34,6 +34,7 @@ export const projectsData = [
     role: "UI/UX & QA",
     description:
       "Interface design and quality testing of a logistics application for freight transportation.",
+    link: "https://play.google.com/store/apps/details?id=com.taksibarang&pcampaignid=web_share",
     image: "/taksibarang/taksibarang.png",
     mockupType: "phone",
     detailImages: [
