@@ -519,27 +519,62 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
   const menuToggleBtn = document.querySelector(".menu-toggle");
   const mobileMenu = document.querySelector(".mobile-menu");
   const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+  const mobileLinkSpans = document.querySelectorAll(".mobile-nav-link span");
 
   if (menuToggleBtn && mobileMenu) {
+    let isMenuOpen = false;
+
+    // Set initial GSAP states to prevent conflicts with CSS transform
+    gsap.set(mobileMenu, { yPercent: -100, autoAlpha: 0 });
+    gsap.set(mobileLinkSpans, { yPercent: 100, opacity: 0 });
+
+    // Create GSAP Timeline for the mobile menu animation
+    const menuTimeline = gsap.timeline({ paused: true });
+
+    // Overlay slides down
+    menuTimeline.to(mobileMenu, {
+      yPercent: 0,
+      autoAlpha: 1,
+      duration: 0.75,
+      ease: "power4.inOut"
+    });
+
+    // Staggered text fade in & slide up
+    menuTimeline.to(mobileLinkSpans, {
+      yPercent: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: "power3.out"
+    }, "-=0.3");
+
     menuToggleBtn.addEventListener("click", () => {
-      menuToggleBtn.classList.toggle("active");
-      mobileMenu.classList.toggle("active");
+      isMenuOpen = !isMenuOpen;
+      menuToggleBtn.classList.toggle("active", isMenuOpen);
       
-      if (mobileMenu.classList.contains("active")) {
+      if (isMenuOpen) {
         document.body.style.overflow = "hidden";
         if (typeof lenis !== "undefined") lenis.stop();
+        mobileMenu.style.pointerEvents = "auto";
+        menuTimeline.play();
       } else {
         document.body.style.overflow = "";
         if (typeof lenis !== "undefined") lenis.start();
+        mobileMenu.style.pointerEvents = "none";
+        menuTimeline.reverse();
       }
     });
 
     mobileLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
+        isMenuOpen = false;
         menuToggleBtn.classList.remove("active");
-        mobileMenu.classList.remove("active");
+        mobileMenu.style.pointerEvents = "none";
         document.body.style.overflow = "";
         if (typeof lenis !== "undefined") lenis.start();
+
+        // Animate menu close
+        menuTimeline.reverse();
 
         if (link.classList.contains("mobile-portfolio-link")) {
           e.preventDefault();
@@ -565,7 +600,9 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
             e.preventDefault();
             const targetElement = document.querySelector(targetId);
             if (targetElement && typeof lenis !== "undefined") {
-              lenis.scrollTo(targetElement, { offset: -100 });
+              setTimeout(() => {
+                lenis.scrollTo(targetElement, { offset: -100 });
+              }, 600); // Wait for reverse animation to finish
             }
           }
         }
