@@ -173,7 +173,8 @@ a {
 }
 
 .nav-container {
-  max-width: 95%;
+  width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
