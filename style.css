@@ -2238,3 +2238,134 @@ a {
     gap: 3rem;
   }
 }
+
+/* ==========================================================================
+   MOBILE MENU & RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  z-index: 150;
+  position: relative;
+}
+
+.menu-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-menu.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: color 0.3s ease, transform 0.3s ease;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.mobile-nav-link:hover {
+  color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .nav-links a {
+    display: none !important;
+  }
+  
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Hamburger transform to X */
+  .menu-toggle.active .menu-line:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+  
+  .menu-toggle.active .menu-line:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Compact meta text columns */
+  .meta-text {
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto;
+  }
+
+  /* Scale down massive ampersand on mobile to fit screen */
+  .ampersand {
+    font-size: 45vw !important;
+    top: -5% !important;
+    left: 5% !important;
+    opacity: 0.7;
+  }
+
+  /* Floating objects opacity reduction to prevent blocking text */
+  .floating-obj {
+    opacity: 0.15 !important;
+  }
+  
+  /* Prevent horizontal scroll issues on mobile due to galaxy orbit lines */
+  .skills-galaxy {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+}
+

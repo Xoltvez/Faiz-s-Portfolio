@@ -514,4 +514,62 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       }
     });
   });
+
+  // Mobile Menu Toggle Logic
+  const menuToggleBtn = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+
+  if (menuToggleBtn && mobileMenu) {
+    menuToggleBtn.addEventListener("click", () => {
+      menuToggleBtn.classList.toggle("active");
+      mobileMenu.classList.toggle("active");
+      
+      if (mobileMenu.classList.contains("active")) {
+        document.body.style.overflow = "hidden";
+        if (typeof lenis !== "undefined") lenis.stop();
+      } else {
+        document.body.style.overflow = "";
+        if (typeof lenis !== "undefined") lenis.start();
+      }
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        menuToggleBtn.classList.remove("active");
+        mobileMenu.classList.remove("active");
+        document.body.style.overflow = "";
+        if (typeof lenis !== "undefined") lenis.start();
+
+        if (link.classList.contains("mobile-portfolio-link")) {
+          e.preventDefault();
+          const targetUrl = "/portfolio?skip=1";
+          if (ptPanel) {
+            gsap.fromTo(ptPanel,
+              { yPercent: 100 },
+              {
+                yPercent: 0,
+                duration: 0.9,
+                ease: "expo.inOut",
+                onComplete: () => {
+                  window.location.href = targetUrl;
+                },
+              }
+            );
+          } else {
+            window.location.href = targetUrl;
+          }
+        } else {
+          const targetId = link.getAttribute("href");
+          if (targetId.startsWith("#")) {
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            if (targetElement && typeof lenis !== "undefined") {
+              lenis.scrollTo(targetElement, { offset: -100 });
+            }
+          }
+        }
+      });
+    });
+  }
 });
