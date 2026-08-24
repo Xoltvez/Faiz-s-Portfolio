@@ -27,14 +27,77 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 1.5 Navbar Blur on Scroll
-  const nav = document.querySelector(".nav");
+  // 1.5 Dynamic Island Navigation Logic
+  const dynamicIsland = document.getElementById("dynamic-island");
+  const scrollPercentEl = document.getElementById("scroll-percent");
+  const islandLinks = document.querySelectorAll(".island-link");
+  const activePill = document.getElementById("nav-active-pill");
+
+  function updateActivePill(targetLink) {
+    if (!targetLink || !activePill) return;
+    const parent = targetLink.parentElement;
+    if (!parent) return;
+
+    const parentRect = parent.getBoundingClientRect();
+    const linkRect = targetLink.getBoundingClientRect();
+
+    if (linkRect.width === 0 || parentRect.width === 0) return;
+
+    const left = linkRect.left - parentRect.left;
+    const width = linkRect.width;
+
+    activePill.style.left = `${left}px`;
+    activePill.style.width = `${width}px`;
+    activePill.style.opacity = "1";
+  }
+
+  // Set initial active pill on PORTFOLIO link
+  const activeLink = document.querySelector(".island-link.active");
+  if (activeLink) {
+    setTimeout(() => updateActivePill(activeLink), 150);
+  }
+
+  // Hover effect on island links
+  islandLinks.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      updateActivePill(link);
+    });
+  });
+
+  const linksWrapper = document.querySelector(".nav-links-wrapper");
+  if (linksWrapper) {
+    linksWrapper.addEventListener("mouseleave", () => {
+      if (activeLink) {
+        updateActivePill(activeLink);
+      }
+    });
+  }
+
+  // Scroll handler for scroll percentage & collapse morphing with hysteresis
+  let lastScrollY = window.scrollY;
+  const scrollThreshold = 10;
+
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      if (nav) nav.classList.add("scrolled");
-    } else {
-      if (nav) nav.classList.remove("scrolled");
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = Math.max(0, Math.min(100, Math.round((currentScrollY / (maxScroll || 1)) * 100)));
+
+    if (scrollPercentEl) {
+      scrollPercentEl.textContent = `${percent}%`;
     }
+
+    if (dynamicIsland) {
+      if (currentScrollY < 80) {
+        dynamicIsland.classList.remove("collapsed");
+      } else if (scrollDelta > scrollThreshold && currentScrollY > 120) {
+        dynamicIsland.classList.add("collapsed");
+      } else if (scrollDelta < -scrollThreshold) {
+        dynamicIsland.classList.remove("collapsed");
+      }
+    }
+
+    lastScrollY = currentScrollY;
   });
 
   // 2. Preloader Animation
@@ -304,7 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 6.5 Navbar Click Transitions
-  const navLinks = document.querySelectorAll(".nav-links a, .logo");
+  const navLinks = document.querySelectorAll(".island-link, .island-brand");
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       if (link.id === "theme-toggle" || link.closest("#theme-toggle") || link.getAttribute("href") === "#") return;

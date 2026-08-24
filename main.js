@@ -413,15 +413,119 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     });
   });
 
-  // 6. Navbar Blur on Scroll
-  const nav = document.querySelector(".nav");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      nav.classList.add("scrolled");
-    } else {
-      nav.classList.remove("scrolled");
-    }
+  // 6. Dynamic Island Navigation Logic
+  const dynamicIsland = document.getElementById("dynamic-island");
+  const scrollPercentEl = document.getElementById("scroll-percent");
+  const islandSecNum = document.getElementById("island-sec-num");
+  const islandSecName = document.getElementById("island-sec-name");
+  const islandLinks = document.querySelectorAll(".island-link");
+  const activePill = document.getElementById("nav-active-pill");
+
+  function updateActivePill(targetLink) {
+    if (!targetLink || !activePill) return;
+    const parent = targetLink.parentElement;
+    if (!parent) return;
+
+    const parentRect = parent.getBoundingClientRect();
+    const linkRect = targetLink.getBoundingClientRect();
+
+    // Prevent updating pill position if links are collapsed / hidden
+    if (linkRect.width === 0 || parentRect.width === 0) return;
+
+    const left = linkRect.left - parentRect.left;
+    const width = linkRect.width;
+
+    activePill.style.left = `${left}px`;
+    activePill.style.width = `${width}px`;
+    activePill.style.opacity = "1";
+  }
+
+  // Set initial active pill position
+  const initialActiveLink = document.querySelector(".island-link.active");
+  if (initialActiveLink) {
+    setTimeout(() => updateActivePill(initialActiveLink), 150);
+  }
+
+  // Hover effect on island links
+  islandLinks.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      updateActivePill(link);
+    });
   });
+
+  const linksWrapper = document.querySelector(".nav-links-wrapper");
+  if (linksWrapper) {
+    linksWrapper.addEventListener("mouseleave", () => {
+      const currentActive = document.querySelector(".island-link.active");
+      if (currentActive) {
+        updateActivePill(currentActive);
+      }
+    });
+  }
+
+  // Scroll handler: Calculate percentage, section observer & collapse morphing with hysteresis
+  let lastScrollY = window.scrollY;
+  const scrollThreshold = 10; // Require significant scroll movement to toggle state
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = Math.max(0, Math.min(100, Math.round((currentScrollY / (maxScroll || 1)) * 100)));
+
+    if (scrollPercentEl) {
+      scrollPercentEl.textContent = `${percent}%`;
+    }
+
+    if (dynamicIsland) {
+      if (currentScrollY < 80) {
+        // At the top of page: always expanded
+        dynamicIsland.classList.remove("collapsed");
+      } else if (scrollDelta > scrollThreshold && currentScrollY > 120) {
+        // Scrolling DOWN past threshold -> collapse
+        dynamicIsland.classList.add("collapsed");
+      } else if (scrollDelta < -scrollThreshold) {
+        // Scrolling UP past threshold -> expand
+        dynamicIsland.classList.remove("collapsed");
+      }
+      // When stopped (scrollDelta near 0), keep existing collapsed state without flickering!
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  // Section Observer for updating Compact Badge & Active Link
+  const sections = document.querySelectorAll("section[id]");
+  if (sections.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px",
+      threshold: 0,
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const secId = entry.target.getAttribute("id");
+          islandLinks.forEach((link) => {
+            const linkHref = link.getAttribute("href");
+            if (linkHref === `#${secId}`) {
+              islandLinks.forEach((l) => l.classList.remove("active"));
+              link.classList.add("active");
+              updateActivePill(link);
+
+              const secNum = link.getAttribute("data-sec");
+              const secName = link.getAttribute("data-name");
+              if (islandSecNum && secNum) islandSecNum.textContent = secNum;
+              if (islandSecName && secName) islandSecName.textContent = secName;
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((sec) => sectionObserver.observe(sec));
+  }
 
   // 7. Theme Toggle
   const themeToggleBtn = document.getElementById("theme-toggle");

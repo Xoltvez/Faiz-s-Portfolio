@@ -154,100 +154,230 @@ a {
   box-shadow: none;
 }
 
-/* Navigation */
-.nav {
+/* Navigation - Dynamic Island (Morphing Pill) */
+.nav.dynamic-island {
   position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 2rem 0;
-  z-index: 100;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0;
+  width: auto;
+  max-width: 95vw;
+  pointer-events: auto;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.island-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--island-bg, rgba(13, 17, 23, 0.88));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--island-border, rgba(255, 255, 255, 0.12));
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  border-radius: 40px;
+  padding: 0.5rem 0.75rem 0.5rem 1.2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width, padding, background, box-shadow;
+}
+
+[data-theme="light"] .island-container {
+  --island-bg: rgba(240, 240, 243, 0.92);
+  --island-border: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Compact Left Badge */
+.island-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.island-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap !important;
+}
+
+/* Island Section Badge */
+.island-section-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
   transition: all 0.3s ease;
 }
 
-.nav.scrolled {
-  padding: 1rem 0;
-  background-color: var(--nav-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--nav-border);
+[data-theme="light"] .island-section-badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
-.nav-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--text-primary);
-}
-
-.nav-links {
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
-
-.nav-links a {
-  position: relative;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-}
-
-.nav-links a:hover {
+.section-num {
   color: var(--accent-color);
+  font-weight: 700;
 }
 
-.nav-links a::after {
-  content: '';
+.section-slash {
+  opacity: 0.4;
+}
+
+.section-name {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Island Scroll Indicator */
+.island-scroll-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 42px;
+  height: 28px;
+  padding: 0 0.4rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+[data-theme="light"] .island-scroll-indicator {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Expanded Section */
+.island-expanded {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Links & Active Sliding Pill */
+.nav-links-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .nav-links-wrapper {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-active-pill {
   position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--accent-color);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  width: 0;
+  background: var(--accent-color);
+  border-radius: 25px;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
 }
 
-.nav-links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.nav.dynamic-island .island-link {
+  position: relative;
+  z-index: 2;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75) !important;
+  padding: 0.45rem 1rem;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav.dynamic-island .island-link:hover,
+.nav.dynamic-island .island-link.active {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .nav.dynamic-island .island-link {
+  color: #444444 !important;
+}
+
+[data-theme="light"] .nav.dynamic-island .island-link:hover,
+[data-theme="light"] .nav.dynamic-island .island-link.active {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* Island Actions (Theme Toggle & Menu Toggle) */
+.island-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .theme-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .theme-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .theme-btn:hover {
-  color: var(--accent-color);
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+  transform: scale(1.08);
 }
 
 .theme-icon-wrapper {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,8 +386,8 @@ a {
 .sun-icon,
 .moon-icon {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
   fill: none;
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
@@ -288,6 +418,41 @@ a {
   transform: rotate(-90deg) scale(0);
   opacity: 0;
   pointer-events: none;
+}
+
+/* Collapsed state when scrolling down */
+.nav.dynamic-island.collapsed .island-container {
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem 0.4rem 1rem;
+}
+
+.nav.dynamic-island.collapsed .nav-links-wrapper {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.4s ease, margin 0.4s ease;
+}
+
+.nav.dynamic-island:hover .island-container,
+.nav.dynamic-island:focus-within .island-container {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="light"] .nav.dynamic-island:hover .island-container,
+[data-theme="light"] .nav.dynamic-island:focus-within .island-container {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.nav.dynamic-island.collapsed:hover .nav-links-wrapper {
+  max-width: 650px;
+  opacity: 1;
+  padding: 0.2rem;
+  pointer-events: auto;
 }
 
 /* Layouts */
@@ -980,9 +1145,6 @@ a {
 }
 
 .meta-text {
-  font-weight: 500;
-  letter-spacing: 1px;
-  display: flex;
   flex-direction: column;
   gap: 0.3rem;
   width: 320px;
@@ -2380,14 +2542,24 @@ a {
 
 /* Mobile responsive fixes */
 @media (max-width: 768px) {
-  .nav-links a {
+  .nav.dynamic-island {
+    top: 16px;
+    max-width: calc(100vw - 32px);
+  }
+
+  .island-container {
+    padding: 0.4rem 0.6rem 0.4rem 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .nav-links-wrapper {
+    display: none !important;
+  }
+
+  .island-section-badge {
     display: none !important;
   }
   
-  .nav-links {
-    gap: 1.5rem;
-  }
-
   .menu-toggle {
     display: flex;
   }

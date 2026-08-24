@@ -105,38 +105,61 @@
       <div class="project-preview-view"><p>View</p></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="#home" class="logo">FAIZ AZZAHRA.</a>
-        <div class="nav-links">
-          <a href="#home" class="hover-target">HOME</a>
-          <a href="#about" class="hover-target">ABOUT</a>
-          <a href="#skills" class="hover-target">SKILLS</a>
-          <a href="/portfolio" class="hover-target nav-portfolio-link">PORTFOLIO</a>
-          <a href="#contact" class="hover-target">CONTACT</a>
-          <button
-            id="theme-toggle"
-            class="theme-btn hover-target"
-            aria-label="Toggle Theme"
-          >
-            <div class="theme-icon-wrapper">
-              <!-- Sun Icon -->
-              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4"></circle>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-              </svg>
-              <!-- Moon Icon -->
-              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-              </svg>
-            </div>
-          </button>
-          <button class="menu-toggle hover-target" aria-label="Toggle Menu">
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-          </button>
+    <!-- Dynamic Island Navigation -->
+    <nav class="nav dynamic-island" id="dynamic-island">
+      <div class="island-container">
+        <!-- Compact Pill Header (visible when collapsed or as header info) -->
+        <div class="island-compact">
+          <a href="#home" class="island-brand hover-target">
+            <span class="brand-name">FAIZ AZZAHRA.</span>
+          </a>
+          
+          <div class="island-section-badge">
+            <span class="section-num" id="island-sec-num">01</span>
+            <span class="section-slash">/</span>
+            <span class="section-name" id="island-sec-name">HOME</span>
+          </div>
+
+          <div class="island-scroll-indicator">
+            <span id="scroll-percent">0%</span>
+          </div>
+        </div>
+
+        <!-- Expanded Pill Body (contains navigation links, active highlight, theme toggle, hamburger) -->
+        <div class="island-expanded">
+          <div class="nav-links-wrapper">
+            <div class="nav-active-pill" id="nav-active-pill"></div>
+            <a href="#home" class="hover-target island-link active" data-sec="01" data-name="HOME">HOME</a>
+            <a href="#about" class="hover-target island-link" data-sec="02" data-name="ABOUT">ABOUT</a>
+            <a href="#skills" class="hover-target island-link" data-sec="03" data-name="SKILLS">SKILLS</a>
+            <a href="/portfolio" class="hover-target island-link nav-portfolio-link" data-sec="04" data-name="PORTFOLIO">PORTFOLIO</a>
+            <a href="#contact" class="hover-target island-link" data-sec="05" data-name="CONTACT">CONTACT</a>
+          </div>
+
+          <div class="island-actions">
+            <button
+              id="theme-toggle"
+              class="theme-btn hover-target"
+              aria-label="Toggle Theme"
+            >
+              <div class="theme-icon-wrapper">
+                <!-- Sun Icon -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                </svg>
+                <!-- Moon Icon -->
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </div>
+            </button>
+            <button class="menu-toggle hover-target" aria-label="Toggle Menu">
+              <span class="menu-line"></span>
+              <span class="menu-line"></span>
+              <span class="menu-line"></span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
