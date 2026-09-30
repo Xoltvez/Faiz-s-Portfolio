@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     });
   }
 
-  // 4. Scroll Animations (Text Reveal)
+  // 4. Scroll Animations (Text Reveal & About Me Character Highlight)
   const revealTexts = document.querySelectorAll(".reveal-text, .section-title");
 
   revealTexts.forEach((text) => {
@@ -374,6 +374,80 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       ease: "power3.out",
     });
   });
+
+  // Helper to split text into word & character spans preserving spacing
+  function splitTextToChars(element) {
+    if (!element) return [];
+    if (element.querySelector(".char")) {
+      return element.querySelectorAll(".char");
+    }
+    const text = element.textContent.trim();
+    const words = text.split(/\s+/);
+
+    element.innerHTML = words
+      .map((word) => {
+        const chars = Array.from(word)
+          .map((char) => `<span class="char">${char}</span>`)
+          .join("");
+        return `<span class="word">${chars}</span>`;
+      })
+      .join(" ");
+
+    return element.querySelectorAll(".char");
+  }
+
+  // Character-by-character highlight animation on scroll for About Me
+  const aboutHeading = document.querySelector(".about-heading");
+  const aboutParagraph = document.querySelector(".about-text p");
+
+  if (aboutHeading) {
+    const headingChars = splitTextToChars(aboutHeading);
+
+    gsap.fromTo(
+      headingChars,
+      {
+        opacity: 0.18,
+        color: "var(--text-secondary)",
+      },
+      {
+        opacity: 1,
+        color: "var(--text-primary)",
+        stagger: 0.02,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".about-me",
+          start: "top 70%",
+          end: "top 15%",
+          scrub: 0.5,
+        },
+      }
+    );
+  }
+
+  if (aboutParagraph) {
+    const paragraphChars = splitTextToChars(aboutParagraph);
+
+    gsap.fromTo(
+      paragraphChars,
+      {
+        opacity: 0.18,
+        color: "var(--text-secondary)",
+      },
+      {
+        opacity: 1,
+        color: "var(--text-primary)",
+        stagger: 0.015,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".about-text",
+          start: "top 75%",
+          end: "bottom 60%",
+          scrub: 0.5,
+        },
+      }
+    );
+  }
+
 
   // 5. Galaxy Rotation
   const galaxyRings = [
@@ -711,6 +785,83 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
           }
         }
       });
+    });
+  }
+
+  // 9. Tech Stack Bento Filter, Lazy Loading & Spotlight Interaction
+  const techSection = document.querySelector("#tech");
+  const techFilterBtns = document.querySelectorAll(".tech-filter-btn");
+  const bentoCards = document.querySelectorAll(".bento-card");
+
+  if (techSection && bentoCards.length > 0) {
+    // Set initial hidden state for lazy entrance animation
+    gsap.set(bentoCards, { opacity: 0, y: 45, scale: 0.94 });
+
+    // Lazy load reveal when user scrolls into view (ScrollTrigger)
+    ScrollTrigger.create({
+      trigger: techSection,
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        gsap.to(bentoCards, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.07,
+          ease: "back.out(1.2)",
+          clearProps: "transform,opacity"
+        });
+      }
+    });
+
+    if (techFilterBtns.length > 0) {
+      techFilterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filterVal = btn.getAttribute("data-filter");
+
+          // Update active filter pill button
+          techFilterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          // Animate cards filtering using GSAP
+          bentoCards.forEach((card) => {
+            const cardCat = card.getAttribute("data-category");
+            const shouldShow = filterVal === "all" || cardCat === filterVal;
+
+            if (shouldShow) {
+              card.classList.remove("filtered-out");
+              gsap.fromTo(card,
+                { opacity: 0, scale: 0.92, y: 15 },
+                { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "power2.out", clearProps: "transform,opacity" }
+              );
+            } else {
+              gsap.to(card, {
+                opacity: 0,
+                scale: 0.92,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => {
+                  card.classList.add("filtered-out");
+                }
+              });
+            }
+          });
+        });
+      });
+    }
+
+    // Spotlight cursor follow glow inside bento cards
+    bentoCards.forEach((card) => {
+      const glow = card.querySelector(".bento-glow");
+      if (glow) {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 136, 204, 0.2) 0%, transparent 60%)`;
+        });
+      }
     });
   }
 });

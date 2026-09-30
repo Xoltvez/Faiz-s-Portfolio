@@ -1233,12 +1233,28 @@ a {
   max-width: 90%;
 }
 
+.about-heading .word,
+.about-text .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.about-heading .char,
+.about-text .char {
+  display: inline-block;
+  color: var(--text-secondary);
+  opacity: 0.18;
+  will-change: opacity, color, transform;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
 .about-text p {
   font-size: 1.25rem;
   line-height: 1.8;
   color: var(--text-secondary);
   max-width: 700px;
 }
+
 
 /* Skills Galaxy */
 .skills-galaxy {
@@ -2303,99 +2319,179 @@ a {
   }
 }
 
-/* --- Tech Stack Section --- */
+/* --- Tech Stack Section (Bento Grid + Glassmorphism & Lazy Loading) --- */
 .tech-stack {
   background-color: var(--bg-color);
   padding: 8rem 0;
   position: relative;
   z-index: 1;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+.tech-header {
+  margin-bottom: 2.5rem;
 }
 
 .tech-subtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
-  margin-top: 1rem;
-  margin-bottom: 4rem;
+  margin-top: 0.8rem;
   font-weight: 400;
+  max-width: 600px;
 }
 
-.tech-categories {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-  width: 100%;
-  margin-top: 4rem;
-}
-
-.tech-row {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.tech-row-title {
-  width: 100%;
-  font-family: var(--font-main);
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--accent-color);
-  border-left: 3px solid var(--accent-color);
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.tech-row-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  width: 100%;
-}
-
-.tech-card {
-  width: 100%;
-  max-width: 100%;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 2rem 1.8rem;
+/* Category Filter Pills */
+.tech-filters {
   display: flex;
   align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.tech-filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .tech-filter-btn {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.filter-count {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+[data-theme="light"] .filter-count {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.tech-filter-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.tech-filter-btn.active {
+  background: var(--text-primary);
+  color: var(--bg-color);
+  border-color: var(--text-primary);
+  box-shadow: 0 8px 25px rgba(0, 136, 204, 0.25);
+}
+
+.tech-filter-btn.active .filter-count {
+  background: var(--bg-color);
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.bento-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 1.5rem;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
 }
 
-[data-theme="light"] .tech-card {
+[data-theme="light"] .bento-card {
   background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
-.tech-card:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--accent-color);
-  box-shadow: 0 15px 35px rgba(0, 136, 204, 0.15);
+.bento-card.bento-featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
 }
 
-[data-theme="light"] .tech-card:hover {
-  background: rgba(0, 0, 0, 0.04);
-  box-shadow: 0 15px 35px rgba(0, 110, 157, 0.1);
+[data-theme="light"] .bento-card.bento-featured {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.005) 100%);
+}
+
+.bento-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 136, 204, 0.12) 0%, transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(0, 136, 204, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.bento-card:hover .bento-glow {
+  opacity: 1;
+}
+
+.bento-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .tech-icon {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  padding: 0.6rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tech-card:hover .tech-icon {
-  transform: scale(1.15) rotate(5deg);
+[data-theme="light"] .tech-icon {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.bento-card:hover .tech-icon {
+  transform: scale(1.15) rotate(6deg);
 }
 
 .tech-icon svg {
@@ -2403,56 +2499,88 @@ a {
   height: 100%;
 }
 
-.tech-info h3 {
-  font-size: 1.4rem;
+.tech-badge {
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.tech-cat {
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
+  font-family: var(--font-mono);
+  padding: 0.35rem 0.85rem;
+  border-radius: 30px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .cat-design {
-  background: rgba(242, 78, 30, 0.1);
+  background: rgba(242, 78, 30, 0.12);
   color: #F24E1E;
+  border: 1px solid rgba(242, 78, 30, 0.2);
 }
 
 .cat-frontend {
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(56, 189, 248, 0.12);
   color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .cat-backend {
-  background: rgba(255, 45, 32, 0.1);
+  background: rgba(255, 45, 32, 0.12);
   color: #FF2D20;
+  border: 1px solid rgba(255, 45, 32, 0.2);
 }
 
 .cat-animation {
-  background: rgba(136, 206, 2, 0.1);
+  background: rgba(136, 206, 2, 0.12);
   color: #88CE02;
+  border: 1px solid rgba(136, 206, 2, 0.2);
 }
 
-.cat-tools {
-  background: rgba(240, 246, 252, 0.1);
-  color: #F0F6FC;
+.bento-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-[data-theme="light"] .cat-tools {
-  background: rgba(36, 41, 47, 0.1);
-  color: #24292f;
+.bento-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.bento-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Hidden Bento Item Filter State */
+.bento-card.filtered-out {
+  display: none !important;
 }
 
 @media (max-width: 1024px) {
-  .tech-categories {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-card.bento-featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+  }
+  .bento-card.bento-featured {
+    grid-column: span 1;
+  }
+  .tech-filters {
+    gap: 0.5rem;
+  }
+  .tech-filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }
 
