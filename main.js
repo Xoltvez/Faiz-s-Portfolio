@@ -177,12 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     smooth: true,
   });
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
   let currentScrollVelocity = 0;
   lenis.on("scroll", (e) => {
     ScrollTrigger.update();
@@ -568,9 +562,33 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     lastScrollY = currentScrollY;
   });
 
+  function setActiveNavSection(secNum, secName, href) {
+    if (islandSecNum) islandSecNum.textContent = secNum;
+    if (islandSecName) islandSecName.textContent = secName;
+
+    islandLinks.forEach((link) => {
+      const linkHref = link.getAttribute("href");
+      if (linkHref === href || linkHref.includes(href)) {
+        islandLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+        updateActivePill(link);
+      }
+    });
+  }
+
   // Section Observer for updating Compact Badge & Active Link
   const sections = document.querySelectorAll("section[id]");
   if (sections.length > 0) {
+    const sectionMapping = {
+      "home": { sec: "01", name: "HOME", href: "#home" },
+      "about": { sec: "02", name: "ABOUT", href: "#about" },
+      "skills": { sec: "03", name: "SKILLS", href: "#skills" },
+      "tech": { sec: "03", name: "SKILLS", href: "#skills" },
+      "project": { sec: "04", name: "PORTFOLIO", href: "/portfolio" },
+      "all-projects": { sec: "04", name: "PORTFOLIO", href: "/portfolio" },
+      "contact": { sec: "05", name: "CONTACT", href: "#contact" },
+    };
+
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -50% 0px",
@@ -581,19 +599,10 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const secId = entry.target.getAttribute("id");
-          islandLinks.forEach((link) => {
-            const linkHref = link.getAttribute("href");
-            if (linkHref === `#${secId}`) {
-              islandLinks.forEach((l) => l.classList.remove("active"));
-              link.classList.add("active");
-              updateActivePill(link);
-
-              const secNum = link.getAttribute("data-sec");
-              const secName = link.getAttribute("data-name");
-              if (islandSecNum && secNum) islandSecNum.textContent = secNum;
-              if (islandSecName && secName) islandSecName.textContent = secName;
-            }
-          });
+          const mapping = sectionMapping[secId];
+          if (mapping) {
+            setActiveNavSection(mapping.sec, mapping.name, mapping.href);
+          }
         }
       });
     }, observerOptions);
@@ -627,27 +636,38 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     // Only run horizontal pinning on desktop (width > 768px)
     ScrollTrigger.matchMedia({
       "(min-width: 769px)": function() {
+        const getShiftUpper = () => {
+          const w = upperTrack.scrollWidth - window.innerWidth + 120;
+          return w > 0 ? -w : -500;
+        };
+        const getShiftLower = () => {
+          const w = lowerTrack.scrollWidth - window.innerWidth + 120;
+          return w > 0 ? w : 500;
+        };
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: gallerySection,
             pin: true,
-            scrub: 1.2,
+            scrub: 1,
             start: "top top",
-            end: "+=1200", // Panjang track scroll pinning
+            end: () => `+=${Math.max(1200, upperTrack.scrollWidth - window.innerWidth + 400)}`,
             invalidateOnRefresh: true,
+            onEnter: () => setActiveNavSection("04", "PORTFOLIO", "/portfolio"),
+            onEnterBack: () => setActiveNavSection("04", "PORTFOLIO", "/portfolio"),
           }
         });
         
-        // Baris atas bergeser ke kiri
+        // Baris atas bergeser ke kiri seluas seluruh track
         tl.to(upperTrack, {
-          x: -380,
+          x: getShiftUpper,
           ease: "none",
         }, 0);
         
-        // Baris bawah mulai dari kiri (shifted) dan bergeser ke kanan
-        gsap.set(lowerTrack, { x: -380 });
+        // Baris bawah mulai dari posisi tergeser ke kiri, lalu bergeser ke kanan
+        gsap.set(lowerTrack, { x: () => -getShiftLower() });
         tl.to(lowerTrack, {
-          x: 40,
+          x: 0,
           ease: "none",
         }, 0);
       }
@@ -864,4 +884,9 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       }
     });
   }
+
+  // Refresh ScrollTrigger after all resources/images are loaded
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+  });
 });

@@ -1679,12 +1679,14 @@ a {
   display: flex;
   align-items: center;
   overflow: hidden;
+  padding-top: 80px;
+  box-sizing: border-box;
 }
 
 .projects-horizontal-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Jeda vertikal diperkecil agar muat di layar laptop */
+  gap: 1.5rem; /* Jeda vertikal diperkecil agar muat di layar laptop */
   width: 100%;
   align-items: flex-start;
   padding: 0 5vw; /* Padding horizontal agar lebih seimbang */
@@ -1704,7 +1706,7 @@ a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  width: 380px; /* Ukuran diperkecil agar 2 baris muat secara vertikal di 100vh */
+  width: 360px; /* Ukuran diperkecil agar 2 baris muat secara vertikal di 100vh */
 }
 
 .gallery-card-image-wrapper {

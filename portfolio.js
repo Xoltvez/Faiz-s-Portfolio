@@ -428,12 +428,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   gsap.ticker.lagSmoothing(0);
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
   // Mobile Menu Toggle Logic
   const menuToggleBtn = document.querySelector(".menu-toggle");
   const mobileMenu = document.querySelector(".mobile-menu");

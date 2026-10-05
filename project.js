@@ -359,11 +359,6 @@ document.addEventListener("DOMContentLoaded", () => {
     smooth: true,
     syncTouch: true // sync scroll for touch events
   });
-  const raf = (time) => { 
-    lenis.raf(time); 
-    requestAnimationFrame(raf); 
-  };
-  requestAnimationFrame(raf);
 
   // Bind ScrollTrigger with Lenis
   lenis.on("scroll", ScrollTrigger.update);
