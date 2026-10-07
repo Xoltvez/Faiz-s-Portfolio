@@ -649,7 +649,8 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
           scrollTrigger: {
             trigger: gallerySection,
             pin: true,
-            scrub: 1,
+            anticipatePin: 1,
+            scrub: true,
             start: "top top",
             end: () => `+=${Math.max(1200, upperTrack.scrollWidth - window.innerWidth + 400)}`,
             invalidateOnRefresh: true,

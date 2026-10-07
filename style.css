@@ -1408,6 +1408,10 @@ a {
 /* Experience Section */
 .experience {
   justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+  background-color: var(--bg-color);
+  padding-bottom: 6rem;
 }
 
 .exp-list {
@@ -1670,6 +1674,9 @@ a {
   position: relative;
   width: 100%;
   overflow: hidden;
+  background-color: var(--bg-color);
+  z-index: 5;
+  padding: 0 !important;
 }
 
 .projects-pin-container {
@@ -1681,6 +1688,7 @@ a {
   overflow: hidden;
   padding-top: 80px;
   box-sizing: border-box;
+  background-color: var(--bg-color);
 }
 
 .projects-horizontal-wrapper {
@@ -1698,6 +1706,8 @@ a {
   gap: 2.5rem; /* Jarak horizontal antar kartu */
   width: max-content;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .gallery-card {
