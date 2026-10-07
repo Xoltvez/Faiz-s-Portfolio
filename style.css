@@ -2332,9 +2332,10 @@ a {
 }
 
 /* --- Tech Stack Section (Bento Grid + Glassmorphism & Lazy Loading) --- */
+/* --- Tech Stack Section (High-Tech Futuristic Bento Concept) --- */
 .tech-stack {
   background-color: var(--bg-color);
-  padding: 8rem 0;
+  padding: 9rem 0;
   position: relative;
   z-index: 1;
   content-visibility: auto;
@@ -2346,38 +2347,39 @@ a {
 }
 
 .tech-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--text-secondary);
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   font-weight: 400;
-  max-width: 600px;
+  max-width: 620px;
+  line-height: 1.6;
 }
 
 /* Category Filter Pills */
 .tech-filters {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .tech-filter-btn {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
-  padding: 0.7rem 1.4rem;
+  padding: 0.75rem 1.6rem;
   font-family: var(--font-main);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  gap: 0.65rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 [data-theme="light"] .tech-filter-btn {
@@ -2388,71 +2390,76 @@ a {
 .filter-count {
   font-size: 0.75rem;
   font-family: var(--font-mono);
-  opacity: 0.6;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.15rem 0.5rem;
+  opacity: 0.75;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
   border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
 [data-theme="light"] .filter-count {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .tech-filter-btn:hover {
   border-color: var(--accent-color);
   color: var(--text-primary);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 110, 157, 0.15);
 }
 
 .tech-filter-btn.active {
-  background: var(--text-primary);
-  color: var(--bg-color);
-  border-color: var(--text-primary);
-  box-shadow: 0 8px 25px rgba(0, 136, 204, 0.25);
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0, 110, 157, 0.4);
 }
 
 .tech-filter-btn.active .filter-count {
-  background: var(--bg-color);
-  color: var(--text-primary);
-  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  opacity: 1;
 }
 
 /* Bento Grid */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1.75rem;
   width: 100%;
 }
 
 .bento-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 2rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 28px;
+  padding: 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  gap: 2rem;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.45s ease, box-shadow 0.45s ease;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
 }
 
 [data-theme="light"] .bento-card {
-  background: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
 .bento-card.bento-featured {
   grid-column: span 2;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(0, 136, 204, 0.25);
 }
 
 [data-theme="light"] .bento-card.bento-featured {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.005) 100%);
+  background: linear-gradient(135deg, rgba(0, 110, 157, 0.06) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-color: rgba(0, 110, 157, 0.2);
 }
 
 .bento-glow {
@@ -2461,16 +2468,20 @@ a {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(0, 136, 204, 0.12) 0%, transparent 60%);
+  background: radial-gradient(circle at center, rgba(0, 136, 204, 0.16) 0%, transparent 60%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
 }
 
 .bento-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  border-color: rgba(0, 136, 204, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  border-color: rgba(0, 136, 204, 0.45);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 0 25px rgba(0, 136, 204, 0.15);
+}
+
+[data-theme="light"] .bento-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 0 0 25px rgba(0, 110, 157, 0.1);
 }
 
 .bento-card:hover .bento-glow {
@@ -2485,64 +2496,67 @@ a {
 }
 
 .tech-icon {
-  width: 52px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.05);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
 }
 
 [data-theme="light"] .tech-icon {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .bento-card:hover .tech-icon {
-  transform: scale(1.15) rotate(6deg);
+  transform: scale(1.12) rotate(5deg);
+  background: rgba(0, 136, 204, 0.15);
+  border-color: rgba(0, 136, 204, 0.4);
 }
 
 .tech-icon svg {
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .tech-badge {
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  padding: 0.35rem 0.85rem;
-  border-radius: 30px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: none !important;
 }
 
 .cat-design {
   background: rgba(242, 78, 30, 0.12);
-  color: #F24E1E;
-  border: 1px solid rgba(242, 78, 30, 0.2);
+  color: #FF5D38;
+  border: 1px solid rgba(242, 78, 30, 0.3);
+  box-shadow: 0 2px 10px rgba(242, 78, 30, 0.15);
 }
 
 .cat-frontend {
   background: rgba(56, 189, 248, 0.12);
   color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
 }
 
 .cat-backend {
   background: rgba(255, 45, 32, 0.12);
-  color: #FF2D20;
-  border: 1px solid rgba(255, 45, 32, 0.2);
+  color: #FF3B30;
+  border: 1px solid rgba(255, 45, 32, 0.3);
+  box-shadow: 0 2px 10px rgba(255, 45, 32, 0.15);
 }
 
 .cat-animation {
   background: rgba(136, 206, 2, 0.12);
-  color: #88CE02;
-  border: 1px solid rgba(136, 206, 2, 0.2);
+  color: #9DE500;
+  border: 1px solid rgba(136, 206, 2, 0.3);
+  box-shadow: 0 2px 10px rgba(136, 206, 2, 0.15);
 }
 
 .bento-card-body {
@@ -2552,18 +2566,19 @@ a {
 }
 
 .bento-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .bento-desc {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 /* Hidden Bento Item Filter State */
@@ -2591,7 +2606,7 @@ a {
     gap: 0.5rem;
   }
   .tech-filter-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1.1rem;
     font-size: 0.85rem;
   }
 }
