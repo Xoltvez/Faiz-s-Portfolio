@@ -63,8 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       }
     });
     
-    upperTrack.innerHTML = upperHTML;
-    lowerTrack.innerHTML = lowerHTML;
+    // Ulangi 4 kali agar marquee horizontal berjalan mulus tanpa celah kosong di resolusi layar berapapun
+    upperTrack.innerHTML = upperHTML.repeat(4);
+    lowerTrack.innerHTML = lowerHTML.repeat(4);
   }
 
   // 1. Preloader Animation
@@ -172,9 +173,11 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
 
   // 2. Lenis Smooth Scroll
   const lenis = new Lenis({
-    duration: 1.5,
+    duration: 2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
+    smoothWheel: true,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1.5,
   });
 
   let currentScrollVelocity = 0;
@@ -193,7 +196,11 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     if (target) {
       const delay = skipPreloader ? 900 : 2500;
       setTimeout(() => {
-        lenis.scrollTo(target, { offset: -100 });
+        lenis.scrollTo(target, {
+          offset: -100,
+          duration: 2.5,
+          easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+        });
       }, delay);
     }
   }
@@ -207,7 +214,9 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           lenis.scrollTo(targetElement, {
-            offset: -100, // Offset for fixed navbar if needed
+            offset: -100,
+            duration: 2.5,
+            easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
           });
         }
       }
@@ -629,49 +638,106 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     });
   }
 
-  // 7.5 Horizontal Scroll Animation for Projects Showcase (Dennis Snellenberg Style - 2 Rows)
+  // 7.5 Continuous Automatic Horizontal Marquee for Projects Showcase (Dennis Snellenberg Style)
   const gallerySection = document.querySelector(".projects-gallery");
 
   if (upperTrack && lowerTrack && gallerySection) {
-    // Only run horizontal pinning on desktop (width > 768px)
-    ScrollTrigger.matchMedia({
-      "(min-width: 769px)": function() {
-        const getShiftUpper = () => {
-          const w = upperTrack.scrollWidth - window.innerWidth + 120;
-          return w > 0 ? -w : -500;
-        };
-        const getShiftLower = () => {
-          const w = lowerTrack.scrollWidth - window.innerWidth + 120;
-          return w > 0 ? w : 500;
-        };
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: gallerySection,
-            pin: true,
-            anticipatePin: 1,
-            scrub: true,
-            start: "top top",
-            end: () => `+=${Math.max(1200, upperTrack.scrollWidth - window.innerWidth + 400)}`,
-            invalidateOnRefresh: true,
-            onEnter: () => setActiveNavSection("04", "PORTFOLIO", "/portfolio"),
-            onEnterBack: () => setActiveNavSection("04", "PORTFOLIO", "/portfolio"),
-          }
-        });
-        
-        // Baris atas bergeser ke kiri seluas seluruh track
-        tl.to(upperTrack, {
-          x: getShiftUpper,
-          ease: "none",
-        }, 0);
-        
-        // Baris bawah mulai dari posisi tergeser ke kiri, lalu bergeser ke kanan
-        gsap.set(lowerTrack, { x: () => -getShiftLower() });
-        tl.to(lowerTrack, {
-          x: 0,
-          ease: "none",
-        }, 0);
+    const getSingleSetWidth = (track) => {
+      const cards = track.querySelectorAll(".gallery-card");
+      if (cards.length >= 6) {
+        const dist = cards[5].offsetLeft - cards[0].offsetLeft;
+        if (dist > 50) return dist;
       }
+      return track.scrollWidth / 4;
+    };
+
+    let singleSetUpper = getSingleSetWidth(upperTrack);
+    let singleSetLower = getSingleSetWidth(lowerTrack);
+
+    const updateSetWidths = () => {
+      singleSetUpper = getSingleSetWidth(upperTrack);
+      singleSetLower = getSingleSetWidth(lowerTrack);
+    };
+
+    window.addEventListener("resize", updateSetWidths);
+    window.addEventListener("load", updateSetWidths);
+
+    let upperX = 0;
+    let lowerX = -singleSetLower;
+
+    let isGalleryHovered = false;
+    const horizontalWrapper = document.querySelector(".projects-horizontal-wrapper");
+    if (horizontalWrapper) {
+      horizontalWrapper.addEventListener("mouseenter", () => { isGalleryHovered = true; });
+      horizontalWrapper.addEventListener("mouseleave", () => { isGalleryHovered = false; });
+      horizontalWrapper.addEventListener("touchstart", () => { isGalleryHovered = true; }, { passive: true });
+      horizontalWrapper.addEventListener("touchend", () => { isGalleryHovered = false; }, { passive: true });
+    }
+
+    // Hanya animasikan saat dekat viewport untuk performa 60fps/120fps maksimal
+    let isGalleryInView = true;
+    const galleryObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isGalleryInView = entry.isIntersecting;
+        });
+      },
+      { root: null, rootMargin: "250px 0px", threshold: 0 }
+    );
+    galleryObserver.observe(gallerySection);
+
+    const baseSpeed = 1.1; // Kecepatan dasar otomatis meluncur mulus tanpa henti
+
+    gsap.ticker.add(() => {
+      if (!isGalleryInView) return;
+
+      if (!singleSetUpper || singleSetUpper <= 50) {
+        singleSetUpper = getSingleSetWidth(upperTrack);
+      }
+      if (!singleSetLower || singleSetLower <= 50) {
+        singleSetLower = getSingleSetWidth(lowerTrack);
+        if (lowerX === 0) lowerX = -singleSetLower;
+      }
+
+      // Saat dihover, perlambat sedikit agar pengunjung nyaman membaca dan mengklik
+      const hoverFactor = isGalleryHovered ? 0.25 : 1;
+
+      // Pengaruh scroll velocity dari Lenis
+      // Bernilai positif saat scroll ke bawah, negatif saat scroll ke atas
+      const scrollInfluence = (currentScrollVelocity || 0) * 0.35;
+
+      // Baris atas otomatis meluncur ke KIRI
+      // Scroll ke bawah mempercepat ke kiri, scroll ke atas meredam/mundur
+      const deltaUpper = (-baseSpeed * hoverFactor) - scrollInfluence;
+      upperX += deltaUpper;
+
+      // Baris bawah otomatis meluncur ke KANAN
+      // Scroll ke bawah mempercepat ke kanan, scroll ke atas meredam/mundur
+      const deltaLower = (baseSpeed * hoverFactor) + scrollInfluence;
+      lowerX += deltaLower;
+
+      // Looping mulus tanpa jeda untuk Baris Atas (bergerak ke kiri)
+      if (singleSetUpper > 50) {
+        while (upperX <= -singleSetUpper) {
+          upperX += singleSetUpper;
+        }
+        while (upperX > 0) {
+          upperX -= singleSetUpper;
+        }
+      }
+
+      // Looping mulus tanpa jeda untuk Baris Bawah (bergerak ke kanan)
+      if (singleSetLower > 50) {
+        while (lowerX >= 0) {
+          lowerX -= singleSetLower;
+        }
+        while (lowerX < -singleSetLower) {
+          lowerX += singleSetLower;
+        }
+      }
+
+      gsap.set(upperTrack, { x: upperX, force3D: true });
+      gsap.set(lowerTrack, { x: lowerX, force3D: true });
     });
   }
 
@@ -800,7 +866,11 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
             const targetElement = document.querySelector(targetId);
             if (targetElement && typeof lenis !== "undefined") {
               setTimeout(() => {
-                lenis.scrollTo(targetElement, { offset: -100 });
+                lenis.scrollTo(targetElement, {
+                  offset: -100,
+                  duration: 2.5,
+                  easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+                });
               }, 600); // Wait for reverse animation to finish
             }
           }

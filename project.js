@@ -355,8 +355,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- LENIS ---
   const lenis = new Lenis({ 
-    duration: 1.2, 
-    smooth: true,
+    duration: 2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1.5,
     syncTouch: true // sync scroll for touch events
   });
 

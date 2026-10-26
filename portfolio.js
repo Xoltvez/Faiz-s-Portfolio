@@ -413,9 +413,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 8. Initialize Smooth Scrolling (Lenis)
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: 2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1.5,
   });
 
   lenis.on("scroll", (e) => {

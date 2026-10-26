@@ -1676,17 +1676,17 @@ a {
   overflow: hidden;
   background-color: var(--bg-color);
   z-index: 5;
-  padding: 0 !important;
+  padding: 4rem 0 6rem 0;
 }
 
 .projects-pin-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* Memenuhi tinggi layar untuk pinning */
+  height: auto;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 80px;
   box-sizing: border-box;
   background-color: var(--bg-color);
 }
@@ -1694,10 +1694,11 @@ a {
 .projects-horizontal-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Jeda vertikal diperkecil agar muat di layar laptop */
+  gap: 2rem;
   width: 100%;
   align-items: flex-start;
-  padding: 0 5vw; /* Padding horizontal agar lebih seimbang */
+  padding: 0;
+  overflow: hidden;
 }
 
 .projects-track {
@@ -1708,6 +1709,7 @@ a {
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  cursor: grab;
 }
 
 .gallery-card {
@@ -1876,33 +1878,37 @@ a {
     cursor: auto;
   }
 
-  /* Responsive Projects Gallery (Kembali vertical stack di HP) */
-  .projects-pin-container {
-    height: auto;
-    overflow: visible;
-    display: block;
+  /* Responsive Projects Gallery (Horizontal Marquee di HP) */
+  .projects-gallery {
+    padding: 3rem 0 !important;
   }
   .projects-pin-container {
     height: auto !important;
+    min-height: auto;
+    overflow: hidden;
+    display: flex;
+    padding: 1rem 0;
   }
   .projects-horizontal-wrapper {
-    padding: 4rem 1.5rem;
+    padding: 1rem 0;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    overflow: hidden;
   }
   .projects-track {
-    flex-direction: column;
-    width: 100%;
-    gap: 3.5rem;
+    flex-direction: row;
+    width: max-content;
+    gap: 1.5rem;
   }
   .gallery-card {
-    width: 100%;
+    width: 280px;
   }
   .gallery-card-image-wrapper {
-    padding: 2rem 2.5rem;
+    padding: 1.2rem 1.5rem;
   }
   .gallery-card-title {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
   }
 }
 
