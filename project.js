@@ -2,11 +2,22 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projectsData } from "./data.js";
+import {
+  initI18n,
+  getSavedLanguage,
+  translations,
+  getProjectDescription,
+  getProjectRole,
+  getProjectDate,
+} from "./i18n.js";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Multi-Language System
+  initI18n();
+
   // --- THEME ---
   const currentTheme = localStorage.getItem("theme") || "dark";
   document.documentElement.setAttribute("data-theme", currentTheme);
@@ -47,45 +58,59 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       bannerTitle.classList.remove("pm-title-long");
     }
-    document.getElementById("pm-desc").innerText = project.description;
+    // Localized dynamic project details (description, role, year, and SEO)
+    const updateProjectDetails = (lang = getSavedLanguage()) => {
+      const projectDesc = getProjectDescription(project, lang);
+      const projectRole = getProjectRole(project, lang);
+      const projectDate = getProjectDate(project, lang);
 
-    // Dynamic SEO update
-    const projectTitle = `${project.title} - Project by Faiz Az-Zahra`;
-    const projectDesc = project.description;
+      const descEl = document.getElementById("pm-desc");
+      if (descEl) descEl.innerText = projectDesc;
+
+      const roleEl = document.getElementById("pm-role");
+      if (roleEl) roleEl.innerText = projectRole;
+
+      const yearEl = document.getElementById("pm-year");
+      if (yearEl) yearEl.innerText = projectDate;
+
+      // Dynamic SEO update
+      const projectTitle = `${project.title} - ${lang === "id" ? "Proyek oleh Faiz Az-Zahra" : "Project by Faiz Az-Zahra"}`;
+      document.title = projectTitle;
+
+      const metaDesc = document.getElementById("meta-desc");
+      if (metaDesc) metaDesc.setAttribute("content", projectDesc);
+
+      const ogTitle = document.getElementById("og-title");
+      if (ogTitle) ogTitle.setAttribute("content", projectTitle);
+
+      const ogDesc = document.getElementById("og-desc");
+      if (ogDesc) ogDesc.setAttribute("content", projectDesc);
+
+      const twitterTitle = document.getElementById("twitter-title");
+      if (twitterTitle) twitterTitle.setAttribute("content", projectTitle);
+
+      const twitterDesc = document.getElementById("twitter-desc");
+      if (twitterDesc) twitterDesc.setAttribute("content", projectDesc);
+    };
+
+    updateProjectDetails(getSavedLanguage());
+    window.addEventListener("languageChanged", (e) => {
+      updateProjectDetails(e.detail?.lang || getSavedLanguage());
+    });
+
     const projectUrl = `https://faizazzahra.com/portfolio/${project.slug}`;
     const imagePath = project.image ? (project.image.startsWith('/') ? project.image : '/' + project.image) : '/profile.png';
     const projectImg = `https://faizazzahra.com${imagePath}`;
 
-    // Update document title
-    document.title = projectTitle;
-
     // Update canonical link
     const canonical = document.getElementById("canonical-link");
     if (canonical) canonical.setAttribute("href", projectUrl);
-
-    // Update meta description
-    const metaDesc = document.getElementById("meta-desc");
-    if (metaDesc) metaDesc.setAttribute("content", projectDesc);
-
-    // Update Open Graph tags
-    const ogTitle = document.getElementById("og-title");
-    if (ogTitle) ogTitle.setAttribute("content", projectTitle);
-
-    const ogDesc = document.getElementById("og-desc");
-    if (ogDesc) ogDesc.setAttribute("content", projectDesc);
 
     const ogUrl = document.getElementById("og-url");
     if (ogUrl) ogUrl.setAttribute("content", projectUrl);
 
     const ogImg = document.getElementById("og-img");
     if (ogImg) ogImg.setAttribute("content", projectImg);
-
-    // Update Twitter Card tags
-    const twitterTitle = document.getElementById("twitter-title");
-    if (twitterTitle) twitterTitle.setAttribute("content", projectTitle);
-
-    const twitterDesc = document.getElementById("twitter-desc");
-    if (twitterDesc) twitterDesc.setAttribute("content", projectDesc);
 
     const twitterUrl = document.getElementById("twitter-url");
     if (twitterUrl) twitterUrl.setAttribute("content", projectUrl);
@@ -107,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "@type": "CreativeWork",
       "name": project.title,
       "headline": `${project.title} - Project by Faiz Az-Zahra`,
-      "description": projectDesc,
+      "description": getProjectDescription(project, getSavedLanguage()),
       "image": projectImg,
       "url": projectUrl,
       "dateCreated": project.date,
@@ -128,8 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (pmLink) {
       pmLink.href = project.link || "#";
     }
-    document.getElementById("pm-year").innerText = project.date;
-    document.getElementById("pm-role").innerText = project.role;
 
     // Set background image of the header banner
     const bannerBg = document.getElementById("pm-banner-bg");
@@ -388,6 +411,17 @@ document.addEventListener("DOMContentLoaded", () => {
       el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
     });
   }
+
+  function updateAllWorkPill() {
+    const allWorkPill = document.querySelector(".all-work-pill");
+    if (allWorkPill) {
+      const currentLang = getSavedLanguage();
+      const label = translations[currentLang]?.project_detail?.all_work || "All work";
+      allWorkPill.innerHTML = `${label} <sup>${projectsData.length}</sup>`;
+    }
+  }
+  updateAllWorkPill();
+  window.addEventListener("languageChanged", updateAllWorkPill);
 
   // --- BACK TO HOME: panel slides UP from below to cover, then navigate ---
   const backBtn = document.getElementById("pm-close");

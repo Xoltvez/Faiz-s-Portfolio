@@ -95,4 +95,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Project 10: MAKARONI LESTARI -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/makaroni-lestari</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project 11: WEDORA ERA WALUYO -->
+  <url>
+    <loc>https://faizazzahra.com/portfolio/wedora-era-waluyo</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

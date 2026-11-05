@@ -129,14 +129,25 @@
         <div class="island-expanded">
           <div class="nav-links-wrapper">
             <div class="nav-active-pill" id="nav-active-pill"></div>
-            <a href="#home" class="hover-target island-link active" data-sec="01" data-name="HOME">HOME</a>
-            <a href="#about" class="hover-target island-link" data-sec="02" data-name="ABOUT">ABOUT</a>
-            <a href="#skills" class="hover-target island-link" data-sec="03" data-name="SKILLS">SKILLS</a>
-            <a href="/portfolio" class="hover-target island-link nav-portfolio-link" data-sec="04" data-name="PORTFOLIO">PORTFOLIO</a>
-            <a href="#contact" class="hover-target island-link" data-sec="05" data-name="CONTACT">CONTACT</a>
+            <a href="#home" class="hover-target island-link active" data-sec="01" data-sec-key="home" data-name="HOME">HOME</a>
+            <a href="#about" class="hover-target island-link" data-sec="02" data-sec-key="about" data-name="ABOUT">ABOUT</a>
+            <a href="#skills" class="hover-target island-link" data-sec="03" data-sec-key="skills" data-name="SKILLS">SKILLS</a>
+            <a href="/portfolio" class="hover-target island-link nav-portfolio-link" data-sec="04" data-sec-key="portfolio" data-name="PORTFOLIO">PORTFOLIO</a>
+            <a href="#contact" class="hover-target island-link" data-sec="05" data-sec-key="contact" data-name="CONTACT">CONTACT</a>
           </div>
 
           <div class="island-actions">
+            <!-- Language Switcher Toggle -->
+            <button
+              id="lang-toggle"
+              class="lang-btn hover-target"
+              aria-label="Toggle Language"
+              title="Change Language"
+            >
+              <span class="lang-opt lang-en active">EN</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-opt lang-id">ID</span>
+            </button>
             <button
               id="theme-toggle"
               class="theme-btn hover-target"
@@ -168,11 +179,16 @@
     <div class="mobile-menu">
       <div class="mobile-menu-inner">
         <div class="mobile-menu-links">
-          <a href="#home" class="mobile-nav-link"><span>HOME</span></a>
-          <a href="#about" class="mobile-nav-link"><span>ABOUT</span></a>
-          <a href="#skills" class="mobile-nav-link"><span>SKILLS</span></a>
-          <a href="/portfolio" class="mobile-nav-link mobile-portfolio-link"><span>PORTFOLIO</span></a>
-          <a href="#contact" class="mobile-nav-link"><span>CONTACT</span></a>
+          <a href="#home" class="mobile-nav-link"><span data-i18n="nav.home">HOME</span></a>
+          <a href="#about" class="mobile-nav-link"><span data-i18n="nav.about">ABOUT</span></a>
+          <a href="#skills" class="mobile-nav-link"><span data-i18n="nav.skills">SKILLS</span></a>
+          <a href="/portfolio" class="mobile-nav-link mobile-portfolio-link"><span data-i18n="nav.portfolio">PORTFOLIO</span></a>
+          <a href="#contact" class="mobile-nav-link"><span data-i18n="nav.contact">CONTACT</span></a>
+        </div>
+        <div class="mobile-lang-wrapper">
+          <button class="mobile-lang-btn hover-target active" data-set-lang="en">EN</button>
+          <span class="mobile-lang-divider">/</span>
+          <button class="mobile-lang-btn hover-target" data-set-lang="id">ID</button>
         </div>
       </div>
     </div>
@@ -268,14 +284,14 @@
           <div class="container">
             <div class="about-grid">
               <div class="about-left reveal-text">
-                <p class="about-label">About Me</p>
+                <p class="about-label" data-i18n="about.label">About Me</p>
               </div>
               <div class="about-right">
-                <h2 class="about-heading">
+                <h2 class="about-heading" data-i18n="about.heading">
                   I am Faiz Azzahra Winanto Putra, a digital designer and developer focused on creating premium interactive web experiences that leave a lasting impression.
                 </h2>
                 <div class="about-text">
-                  <p>
+                  <p data-i18n="about.desc">
                     Bridging the gap between design and engineering, I
                     specialize in UI/UX design, frontend development, and
                     creating seamless user journeys. My goal is to build digital
@@ -301,14 +317,14 @@
                   <div class="orbit-item item-1">
                     <div class="counter-spin-1">
                       <span class="stand-up"
-                        ><span class="dot"></span>UI/UX DESIGN</span
+                        ><span class="dot"></span><span data-i18n="galaxy.uiux">UI/UX DESIGN</span></span
                       >
                     </div>
                   </div>
                   <div class="orbit-item item-2">
                     <div class="counter-spin-1">
                       <span class="stand-up"
-                        ><span class="dot"></span>USER FLOW</span
+                        ><span class="dot"></span><span data-i18n="galaxy.flow">USER FLOW</span></span
                       >
                     </div>
                   </div>
@@ -319,14 +335,14 @@
                   <div class="orbit-item item-3">
                     <div class="counter-spin-2">
                       <span class="stand-up"
-                        ><span class="dot"></span>PROTOTYPE</span
+                        ><span class="dot"></span><span data-i18n="galaxy.prototype">PROTOTYPE</span></span
                       >
                     </div>
                   </div>
                   <div class="orbit-item item-4">
                     <div class="counter-spin-2">
                       <span class="stand-up"
-                        ><span class="dot"></span>WEB DESIGN</span
+                        ><span class="dot"></span><span data-i18n="galaxy.web_design">WEB DESIGN</span></span
                       >
                     </div>
                   </div>
@@ -337,21 +353,21 @@
                   <div class="orbit-item item-5">
                     <div class="counter-spin-3">
                       <span class="stand-up"
-                        ><span class="dot"></span>JR WEB DEVELOPER</span
+                        ><span class="dot"></span><span data-i18n="galaxy.web_dev">JR WEB DEVELOPER</span></span
                       >
                     </div>
                   </div>
                   <div class="orbit-item item-6">
                     <div class="counter-spin-3">
                       <span class="stand-up"
-                        ><span class="dot"></span>GRAPHIC DESIGN</span
+                        ><span class="dot"></span><span data-i18n="galaxy.graphic">GRAPHIC DESIGN</span></span
                       >
                     </div>
                   </div>
                   <div class="orbit-item item-7">
                     <div class="counter-spin-3">
                       <span class="stand-up"
-                        ><span class="dot"></span>JR FRONTEND DEV</span
+                        ><span class="dot"></span><span data-i18n="galaxy.frontend">JR FRONTEND DEV</span></span
                       >
                     </div>
                   </div>
@@ -375,14 +391,14 @@
           <div class="container reveal-text">
             <div class="tech-header">
               <h2 class="section-title"><span class="blue-text">TECH</span> STACK</h2>
-              <p class="tech-subtitle">Tools and technologies I empower to craft high-performance digital experiences</p>
+              <p class="tech-subtitle" data-i18n="tech.subtitle">Tools and technologies I empower to craft high-performance digital experiences</p>
             </div>
             
             <!-- Category Filter Pills -->
             <div class="tech-filters">
-              <button class="tech-filter-btn active hover-target" data-filter="all">All Stack <span class="filter-count">11</span></button>
-              <button class="tech-filter-btn hover-target" data-filter="design">Design & Creative <span class="filter-count">4</span></button>
-              <button class="tech-filter-btn hover-target" data-filter="backend">Backend & Tools <span class="filter-count">3</span></button>
+              <button class="tech-filter-btn active hover-target" data-filter="all"><span data-i18n="tech.filter_all">All Stack</span> <span class="filter-count">11</span></button>
+              <button class="tech-filter-btn hover-target" data-filter="design"><span data-i18n="tech.filter_design">Design & Creative</span> <span class="filter-count">4</span></button>
+              <button class="tech-filter-btn hover-target" data-filter="backend"><span data-i18n="tech.filter_backend">Backend & Tools</span> <span class="filter-count">3</span></button>
             </div>
 
             <!-- Bento Grid -->
@@ -580,14 +596,14 @@
         <!-- Project Section -->
         <section id="project" class="experience section">
           <div class="container">
-            <h2 class="section-title">PROJECT</h2>
+            <h2 class="section-title" data-i18n="project.title">PROJECT</h2>
             <div class="exp-list">
               <!-- Projects are dynamically injected here via main.js -->
             </div>
 
             <div class="more-work-container reveal-text">
               <a href="/portfolio" class="more-work-btn hover-target"
-                >More Project <sup>10</sup></a
+                >More Project <sup>12</sup></a
               >
             </div>
           </div>
@@ -617,14 +633,14 @@
           <div class="container">
             <div class="footer-top reveal-text">
               <h2 class="huge-text hover-target">
-                <a href="mailto:faizazzahra88@gmail.com">LET'S TALK ↗</a>
+                <a href="mailto:faizazzahra88@gmail.com" data-i18n="footer.talk">LET'S TALK ↗</a>
               </h2>
             </div>
             <div class="footer-bottom reveal-text">
               <div class="socials">
                 <a href="https://linkedin.com/in/faizazzahrawinantoputra" class="hover-target">LINKEDIN</a>
                 <a href="https://github.com/Xoltvez" class="hover-target">GITHUB</a>
-                <a href="/portofolio%20letter/Portofolio%20Letter%20Faiz%20Azzahra%20Winanto%20Putra-compressed%20(1).pdf" class="hover-target" target="_blank" rel="noopener noreferrer">OTHER PORTFOLIO</a>
+                <a href="/portofolio%20letter/Portofolio%20Letter%20Faiz%20Azzahra%20Winanto%20Putra-compressed%20(1).pdf" class="hover-target" target="_blank" rel="noopener noreferrer" data-i18n="footer.other">OTHER PORTFOLIO</a>
               </div>
               <p>&copy; 2026 Faiz Az-Zahra.</p>
             </div>

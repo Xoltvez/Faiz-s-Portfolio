@@ -2,10 +2,21 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projectsData } from "./data.js";
+import {
+  initI18n,
+  getSavedLanguage,
+  translations,
+  getProjectDescription,
+  getProjectRole,
+  getProjectDate,
+} from "./i18n.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Multi-Language System
+  initI18n();
+
   // 1. Theme Configuration
   const themeToggleBtn = document.getElementById("theme-toggle");
   const currentTheme = localStorage.getItem("theme");
@@ -61,14 +72,23 @@ document.addEventListener("DOMContentLoaded", () => {
   islandLinks.forEach((link) => {
     link.addEventListener("mouseenter", () => {
       updateActivePill(link);
+      islandLinks.forEach((l) => {
+        if (l !== link) {
+          l.classList.add("not-hovered");
+        } else {
+          l.classList.remove("not-hovered");
+        }
+      });
     });
   });
 
   const linksWrapper = document.querySelector(".nav-links-wrapper");
   if (linksWrapper) {
     linksWrapper.addEventListener("mouseleave", () => {
-      if (activeLink) {
-        updateActivePill(activeLink);
+      islandLinks.forEach((l) => l.classList.remove("not-hovered"));
+      const currentActive = document.querySelector(".island-link.active");
+      if (currentActive) {
+        updateActivePill(currentActive);
       }
     });
   }
@@ -263,6 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderProjects(filter = "all") {
     let gridHTML = "";
     let listHTML = "";
+    const currentLang = getSavedLanguage();
     
     projectsData.forEach((project, index) => {
       const roleLower = project.role.toLowerCase();
@@ -275,7 +296,10 @@ document.addEventListener("DOMContentLoaded", () => {
       
       if (filter !== "all" && category !== filter) return;
 
-      const year = project.date.split(" ")[1] || project.date;
+      const roleText = getProjectRole(project, currentLang);
+      const dateText = getProjectDate(project, currentLang);
+      const descText = getProjectDescription(project, currentLang);
+      const year = dateText.split(" ")[1] || dateText;
       
       gridHTML += `
         <a href="/portfolio/${project.slug}" class="work-card hover-target reveal-text" data-index="${index}">
@@ -285,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="work-card-meta">
             <h3 class="work-card-title">${project.title}</h3>
             <div class="work-card-tags">
-              <span>${project.role}</span>
+              <span>${roleText}</span>
               <span class="work-card-year">${year}</span>
             </div>
           </div>
@@ -295,11 +319,11 @@ document.addEventListener("DOMContentLoaded", () => {
       listHTML += `
         <a href="/portfolio/${project.slug}" class="exp-item hover-target reveal-text" data-index="${index}" data-image="${project.image || ''}" style="text-decoration: none; color: inherit;">
           <div class="exp-meta">
-            <span>${project.date}</span><br /><span>${project.role}</span>
+            <span>${dateText}</span><br /><span>${roleText}</span>
           </div>
           <div class="exp-details">
             <h3>${project.title}</h3>
-            <p>${project.description || ''}</p>
+            <p>${descText || ''}</p>
           </div>
         </a>
       `;
@@ -326,9 +350,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const designBtn = document.querySelector('[data-filter="design"]');
   const devBtn = document.querySelector('[data-filter="development"]');
   
-  if (uiuxBtn) uiuxBtn.innerHTML = `UI/UX Design <sup>${uiuxCount}</sup>`;
-  if (designBtn) designBtn.innerHTML = `Design <sup>${designCount}</sup>`;
-  if (devBtn) devBtn.innerHTML = `Development <sup>${devCount}</sup>`;
+  function updateFilterButtons() {
+    const currentLang = getSavedLanguage();
+    const t = translations[currentLang]?.portfolio_page || translations.en.portfolio_page;
+    if (uiuxBtn) uiuxBtn.innerHTML = `${t.filter_uiux} <sup>${uiuxCount}</sup>`;
+    if (designBtn) designBtn.innerHTML = `${t.filter_design} <sup>${designCount}</sup>`;
+    if (devBtn) devBtn.innerHTML = `${t.filter_dev} <sup>${devCount}</sup>`;
+  }
+  updateFilterButtons();
+
+  window.addEventListener("languageChanged", () => {
+    updateFilterButtons();
+    const activeFilterBtn = document.querySelector(".filter-btn.active");
+    const currentFilter = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
+    renderProjects(currentFilter);
+    const currentActive = document.querySelector(".island-link.active");
+    if (currentActive) {
+      requestAnimationFrame(() => updateActivePill(currentActive));
+      setTimeout(() => updateActivePill(currentActive), 60);
+      setTimeout(() => updateActivePill(currentActive), 150);
+    }
+  });
 
   // Initial render
   if (workGrid || workListBody) {
@@ -374,6 +416,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetUrl = link.getAttribute("href");
       if (targetUrl) {
         e.preventDefault();
+        
+        // Immediately make staying active menu turn black and move active pill to clicked link
+        islandLinks.forEach((l) => {
+          l.classList.remove("active");
+          l.classList.remove("not-hovered");
+        });
+        if (link.classList.contains("island-link")) {
+          link.classList.add("active");
+          updateActivePill(link);
+        }
+
         if (ptPanel) {
           gsap.set(ptPanel, { yPercent: 100 });
           gsap.to(ptPanel, {

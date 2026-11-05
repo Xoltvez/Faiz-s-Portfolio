@@ -61,9 +61,9 @@
         }
       }
     </script>
-    <script type="module" crossorigin src="/assets/portfolio-BChS38m9.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/data-CsdshLCO.js">
-    <link rel="stylesheet" crossorigin href="/assets/data-D8rBe4Kd.css">
+    <script type="module" crossorigin src="/assets/portfolio-uGreDaer.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/i18n-_pLjPekT.js">
+    <link rel="stylesheet" crossorigin href="/assets/i18n-wm4WcGci.css">
   </head>
 
     <!-- Custom Cursor -->
@@ -101,14 +101,25 @@
         <div class="island-expanded">
           <div class="nav-links-wrapper">
             <div class="nav-active-pill" id="nav-active-pill"></div>
-            <a href="/?skip=1#home" class="hover-target island-link" data-sec="01" data-name="HOME">HOME</a>
-            <a href="/?skip=1#about" class="hover-target island-link" data-sec="02" data-name="ABOUT">ABOUT</a>
-            <a href="/?skip=1#skills" class="hover-target island-link" data-sec="03" data-name="SKILLS">SKILLS</a>
-            <a href="/portfolio" class="hover-target island-link active" data-sec="04" data-name="PORTFOLIO">PORTFOLIO</a>
-            <a href="/?skip=1#contact" class="hover-target island-link" data-sec="05" data-name="CONTACT">CONTACT</a>
+            <a href="/?skip=1#home" class="hover-target island-link" data-sec="01" data-sec-key="home" data-name="HOME">HOME</a>
+            <a href="/?skip=1#about" class="hover-target island-link" data-sec="02" data-sec-key="about" data-name="ABOUT">ABOUT</a>
+            <a href="/?skip=1#skills" class="hover-target island-link" data-sec="03" data-sec-key="skills" data-name="SKILLS">SKILLS</a>
+            <a href="/portfolio" class="hover-target island-link active" data-sec="04" data-sec-key="portfolio" data-name="PORTFOLIO">PORTFOLIO</a>
+            <a href="/?skip=1#contact" class="hover-target island-link" data-sec="05" data-sec-key="contact" data-name="CONTACT">CONTACT</a>
           </div>
 
           <div class="island-actions">
+            <!-- Language Switcher Toggle -->
+            <button
+              id="lang-toggle"
+              class="lang-btn hover-target"
+              aria-label="Toggle Language"
+              title="Change Language"
+            >
+              <span class="lang-opt lang-en active">EN</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-opt lang-id">ID</span>
+            </button>
             <button
               id="theme-toggle"
               class="theme-btn hover-target"
@@ -140,11 +151,16 @@
     <div class="mobile-menu">
       <div class="mobile-menu-inner">
         <div class="mobile-menu-links">
-          <a href="/?skip=1#home" class="mobile-nav-link"><span>HOME</span></a>
-          <a href="/?skip=1#about" class="mobile-nav-link"><span>ABOUT</span></a>
-          <a href="/?skip=1#skills" class="mobile-nav-link"><span>SKILLS</span></a>
-          <a href="/portfolio" class="mobile-nav-link mobile-portfolio-link"><span>PORTFOLIO</span></a>
-          <a href="/?skip=1#contact" class="mobile-nav-link"><span>CONTACT</span></a>
+          <a href="/?skip=1#home" class="mobile-nav-link"><span data-i18n="nav.home">HOME</span></a>
+          <a href="/?skip=1#about" class="mobile-nav-link"><span data-i18n="nav.about">ABOUT</span></a>
+          <a href="/?skip=1#skills" class="mobile-nav-link"><span data-i18n="nav.skills">SKILLS</span></a>
+          <a href="/portfolio" class="mobile-nav-link mobile-portfolio-link"><span data-i18n="nav.portfolio">PORTFOLIO</span></a>
+          <a href="/?skip=1#contact" class="mobile-nav-link"><span data-i18n="nav.contact">CONTACT</span></a>
+        </div>
+        <div class="mobile-lang-wrapper">
+          <button class="mobile-lang-btn hover-target active" data-set-lang="en">EN</button>
+          <span class="mobile-lang-divider">/</span>
+          <button class="mobile-lang-btn hover-target" data-set-lang="id">ID</button>
         </div>
       </div>
     </div>
@@ -156,12 +172,12 @@
         <!-- Work Hero Section -->
         <section class="work-page-hero section">
           <div class="container">
-            <h1 class="work-hero-title reveal-text">Creating next level <br> digital products</h1>
+            <h1 class="work-hero-title reveal-text" data-i18n-html="portfolio_page.hero_title">Creating next level <br> digital products</h1>
             
             <!-- Filters & View Toggle Bar -->
             <div class="portfolio-controls reveal-text">
               <div class="portfolio-filters">
-                <button class="filter-btn active hover-target" data-filter="all">All</button>
+                <button class="filter-btn active hover-target" data-filter="all"><span data-i18n="portfolio_page.filter_all">All</span></button>
                 <button class="filter-btn hover-target" data-filter="ui-ux">UI/UX Design <sup>0</sup></button>
                 <button class="filter-btn hover-target" data-filter="design">Design <sup>0</sup></button>
                 <button class="filter-btn hover-target" data-filter="development">Development <sup>0</sup></button>
@@ -203,14 +219,14 @@
           <div class="container">
             <div class="footer-top reveal-text">
               <h2 class="huge-text hover-target">
-                <a href="mailto:faizazzahra88@gmail.com">LET'S TALK ↗</a>
+                <a href="mailto:faizazzahra88@gmail.com" data-i18n="footer.talk">LET'S TALK ↗</a>
               </h2>
             </div>
             <div class="footer-bottom reveal-text">
               <div class="socials">
                 <a href="https://linkedin.com/in/faizazzahrawinantoputra" class="hover-target">LINKEDIN</a>
                 <a href="https://github.com/Xoltvez" class="hover-target">GITHUB</a>
-                <a href="/portofolio%20letter/Portofolio%20Letter%20Faiz%20Azzahra%20Winanto%20Putra-compressed%20(1).pdf" class="hover-target" target="_blank" rel="noopener noreferrer">OTHER PORTFOLIO</a>
+                <a href="/portofolio%20letter/Portofolio%20Letter%20Faiz%20Azzahra%20Winanto%20Putra-compressed%20(1).pdf" class="hover-target" target="_blank" rel="noopener noreferrer" data-i18n="footer.other">OTHER PORTFOLIO</a>
               </div>
               <p>&copy; 2026 Faiz Az-Zahra.</p>
             </div>

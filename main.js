@@ -2,28 +2,116 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projectsData } from "./data.js";
+import {
+  initI18n,
+  getSavedLanguage,
+  translations,
+  getProjectDescription,
+  getProjectRole,
+  getProjectDate,
+} from "./i18n.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynamically
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Multi-Language System
+  initI18n();
+
+  // Render Projects Dynamically
   const expList = document.querySelector(".exp-list");
   if (expList) {
+    const currentLang = getSavedLanguage();
     let projectsHTML = "";
     projectsData.slice(0, 5).forEach((project, index) => {
+      const dateText = getProjectDate(project, currentLang);
+      const roleText = getProjectRole(project, currentLang);
+      const descText = getProjectDescription(project, currentLang);
       projectsHTML += `
         <div class="exp-item hover-target reveal-text" data-image="${project.image}" data-index="${index}">
           <div class="exp-meta">
-            <span>${project.date}</span><br /><span>${project.role}</span>
+            <span>${dateText}</span><br /><span>${roleText}</span>
           </div>
           <div class="exp-details">
             <h3>${project.title}</h3>
-            <p>${project.description}</p>
+            <p>${descText}</p>
           </div>
         </div>
       `;
     });
     expList.innerHTML = projectsHTML;
   }
+
+  function updateExpListTexts() {
+    const currentLang = getSavedLanguage();
+    const expItems = document.querySelectorAll(".exp-list .exp-item");
+    expItems.forEach((item, index) => {
+      const project = projectsData[index];
+      if (!project) return;
+      const dateEl = item.querySelector(".exp-meta span:first-child");
+      const roleEl = item.querySelector(".exp-meta span:last-child");
+      const descEl = item.querySelector(".exp-details p");
+      if (dateEl) dateEl.innerText = getProjectDate(project, currentLang);
+      if (roleEl) roleEl.innerText = getProjectRole(project, currentLang);
+      if (descEl) descEl.innerText = getProjectDescription(project, currentLang);
+    });
+  }
+
+  function updateGalleryCardTexts() {
+    const currentLang = getSavedLanguage();
+    const galleryCards = document.querySelectorAll(".gallery-card");
+    galleryCards.forEach((card) => {
+      const index = parseInt(card.getAttribute("data-index"), 10);
+      const project = projectsData[index];
+      if (!project) return;
+      const dateText = getProjectDate(project, currentLang);
+      const year = dateText.split(" ")[1] || dateText;
+      const yearEl = card.querySelector(".gallery-card-year");
+      const roleEl = card.querySelector(".gallery-card-role");
+      if (yearEl) yearEl.innerText = year;
+      if (roleEl) roleEl.innerText = getProjectRole(project, currentLang);
+    });
+  }
+
+  function updateMoreWorkBtn() {
+    const moreWorkBtn = document.querySelector(".more-work-btn");
+    if (moreWorkBtn) {
+      const currentLang = getSavedLanguage();
+      const label = translations[currentLang]?.project?.more || "More Project";
+      moreWorkBtn.innerHTML = `${label} <sup>${projectsData.length}</sup>`;
+    }
+  }
+  updateMoreWorkBtn();
+
+  function updateMarquee() {
+    const currentLang = getSavedLanguage();
+    const marqueeText = translations[currentLang]?.hero?.marquee;
+    if (marqueeText) {
+      document.querySelectorAll(".marquee-inner span").forEach(span => {
+        span.textContent = marqueeText;
+      });
+    }
+  }
+  updateMarquee();
+
+  window.addEventListener("languageChanged", () => {
+    updateMoreWorkBtn();
+    updateMarquee();
+    updateExpListTexts();
+    updateGalleryCardTexts();
+    const activeLink = document.querySelector(".island-link.active");
+    if (activeLink) {
+      const currentLang = getSavedLanguage();
+      const secKey = activeLink.getAttribute("data-sec-key");
+      const name = (secKey && translations[currentLang]?.island?.[secKey.toUpperCase()]) || activeLink.getAttribute("data-name");
+      const secNameEl = document.getElementById("island-sec-name");
+      if (secNameEl && name) {
+        secNameEl.textContent = name;
+      }
+      requestAnimationFrame(() => updateActivePill(activeLink));
+      setTimeout(() => updateActivePill(activeLink), 60);
+      setTimeout(() => updateActivePill(activeLink), 150);
+    }
+  });
 
   // Render Projects Grid (Dennis Snellenberg Style Showcase - 2 Rows)
   const upperTrack = document.querySelector(".upper-track");
@@ -33,9 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
     let upperHTML = "";
     let lowerHTML = "";
     const bgColor = "#e3e3e3"; // Warna background abu-abu terang seragam untuk semua kartu
+    const currentLang = getSavedLanguage();
     
     projectsData.forEach((project, index) => {
-      const year = project.date.split(" ")[1] || project.date;
+      const dateText = getProjectDate(project, currentLang);
+      const roleText = getProjectRole(project, currentLang);
+      const year = dateText.split(" ")[1] || dateText;
       
       const cardHTML = `
         <a href="/portfolio/${project.slug}" class="gallery-card hover-target reveal-text" data-index="${index}">
@@ -49,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
             </div>
             <div class="gallery-card-divider"></div>
             <div class="gallery-card-footer">
-              <span class="gallery-card-role">${project.role}</span>
+              <span class="gallery-card-role">${roleText}</span>
             </div>
           </div>
         </a>
@@ -527,12 +618,20 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
   islandLinks.forEach((link) => {
     link.addEventListener("mouseenter", () => {
       updateActivePill(link);
+      islandLinks.forEach((l) => {
+        if (l !== link) {
+          l.classList.add("not-hovered");
+        } else {
+          l.classList.remove("not-hovered");
+        }
+      });
     });
   });
 
   const linksWrapper = document.querySelector(".nav-links-wrapper");
   if (linksWrapper) {
     linksWrapper.addEventListener("mouseleave", () => {
+      islandLinks.forEach((l) => l.classList.remove("not-hovered"));
       const currentActive = document.querySelector(".island-link.active");
       if (currentActive) {
         updateActivePill(currentActive);
@@ -573,7 +672,9 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
 
   function setActiveNavSection(secNum, secName, href) {
     if (islandSecNum) islandSecNum.textContent = secNum;
-    if (islandSecName) islandSecName.textContent = secName;
+    const currentLang = getSavedLanguage();
+    const translatedName = translations[currentLang]?.island?.[secName] || secName;
+    if (islandSecName) islandSecName.textContent = translatedName;
 
     islandLinks.forEach((link) => {
       const linkHref = link.getAttribute("href");
@@ -755,6 +856,14 @@ document.addEventListener("DOMContentLoaded", () => {  // Render Projects Dynami
       let targetUrl;
       if (item.classList.contains("more-work-btn") || item.classList.contains("nav-portfolio-link")) {
         targetUrl = "/portfolio?skip=1";
+        if (item.classList.contains("nav-portfolio-link")) {
+          islandLinks.forEach((l) => {
+            l.classList.remove("active");
+            l.classList.remove("not-hovered");
+          });
+          item.classList.add("active");
+          updateActivePill(item);
+        }
       } else {
         const index = parseInt(item.getAttribute("data-index"), 10);
         const project = projectsData[index];

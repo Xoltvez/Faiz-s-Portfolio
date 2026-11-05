@@ -57,9 +57,21 @@
         <!-- Floating Navigation -->
         <div class="pm-nav">
           <div class="pm-nav-brand">FAIZ AZZAHRA.</div>
-          <button class="pm-close hover-target" id="pm-close">
-            BACK TO HOME ↗
-          </button>
+          <div class="pm-nav-actions" style="display: flex; align-items: center; gap: 0.75rem;">
+            <button
+              id="lang-toggle"
+              class="lang-btn hover-target"
+              aria-label="Toggle Language"
+              title="Change Language"
+            >
+              <span class="lang-opt lang-en active">EN</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-opt lang-id">ID</span>
+            </button>
+            <button class="pm-close hover-target" id="pm-close" data-i18n="project_detail.back">
+              BACK TO HOME ↗
+            </button>
+          </div>
         </div>
         
         <!-- Dennis Snellenberg Hero Banner Frame with Parallax -->
@@ -75,20 +87,20 @@
           <div class="pm-banner-meta">
             <div class="pm-meta-grid">
               <div class="pm-meta-item">
-                <span class="pm-col-label">Role</span>
+                <span class="pm-col-label" data-i18n="project_detail.role">Role</span>
                 <span class="pm-col-value" id="pm-role">Frontend development</span>
               </div>
               <div class="pm-meta-item">
-                <span class="pm-col-label">Year</span>
+                <span class="pm-col-label" data-i18n="project_detail.year">Year</span>
                 <span class="pm-col-value" id="pm-year">2025</span>
               </div>
               <div class="pm-meta-item pm-meta-desc">
-                <span class="pm-col-label">Description</span>
+                <span class="pm-col-label" data-i18n="project_detail.desc">Description</span>
                 <span class="pm-col-value" id="pm-desc">A website that celebrates the stars.</span>
               </div>
               <div class="pm-meta-item pm-meta-link">
-                <span class="pm-col-label">Live Site</span>
-                <a href="#" class="see-portfolio-btn hover-target" id="pm-link" target="_blank" rel="noopener noreferrer">See Portfolio ↗</a>
+                <span class="pm-col-label" data-i18n="project_detail.live">Live Site</span>
+                <a href="#" class="see-portfolio-btn hover-target" id="pm-link" target="_blank" rel="noopener noreferrer" data-i18n="project_detail.see">See Portfolio ↗</a>
               </div>
             </div>
           </div>
@@ -103,7 +115,7 @@
     <!-- Next Project Footer -->
     <footer class="project-footer section">
       <div class="next-case-wrapper hover-target" id="next-case-btn">
-        <span class="next-case-label">Next portfolio</span>
+        <span class="next-case-label" data-i18n="project_detail.next_label">Next portfolio</span>
         <h1 class="next-case-title" id="next-case-title">Next Project</h1>
         <div class="next-case-image-reveal">
           <div class="next-case-img" id="next-case-img"></div>
@@ -113,7 +125,7 @@
       <div class="footer-divider"></div>
       
       <div class="all-work-btn-wrapper">
-        <a href="/portfolio" class="all-work-pill hover-target">All work <sup>10</sup></a>
+        <a href="/portfolio" class="all-work-pill hover-target"><span data-i18n="project_detail.all_work">All work</span> <sup>12</sup></a>
       </div>
       
       <div class="project-footer-bottom">
