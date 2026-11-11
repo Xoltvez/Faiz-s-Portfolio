@@ -2481,279 +2481,587 @@ a {
 /* --- Tech Stack Section (High-Tech Futuristic Bento Concept) --- */
 .tech-stack {
   background-color: var(--bg-color);
-  padding: 9rem 0;
+  padding: 6rem 0;
   position: relative;
   z-index: 1;
   content-visibility: auto;
   contain-intrinsic-size: 1px 700px;
 }
 
-.tech-header {
-  margin-bottom: 2.5rem;
-}
 
-.tech-subtitle {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  margin-top: 1rem;
-  font-weight: 400;
-  max-width: 620px;
-  line-height: 1.6;
-}
 
-/* Category Filter Pills */
-.tech-filters {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-bottom: 3.5rem;
-}
-
-.tech-filter-btn {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 40px;
-  padding: 0.75rem 1.6rem;
-  font-family: var(--font-main);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-[data-theme="light"] .tech-filter-btn {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-.filter-count {
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  opacity: 0.75;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.55rem;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-[data-theme="light"] .filter-count {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.tech-filter-btn:hover {
-  border-color: var(--accent-color);
-  color: var(--text-primary);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 110, 157, 0.15);
-}
-
-.tech-filter-btn.active {
-  background: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-  box-shadow: 0 10px 30px rgba(0, 110, 157, 0.4);
-}
-
-.tech-filter-btn.active .filter-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  opacity: 1;
-}
-
-/* Bento Grid */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.75rem;
+/* --- Tech Stack Horizontal Marquee (Dennis Snellenberg Style) --- */
+.tech-marquee-container {
   width: 100%;
-}
-
-.bento-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 28px;
-  padding: 2.2rem;
+  margin: 0 0 1rem 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.45s ease, box-shadow 0.45s ease;
+  gap: 1.25rem;
+  overflow: hidden;
+  position: relative;
+  padding: 0.5rem 0;
+  /* Soft Edge Fade Gradient */
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.tech-marquee-row {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  user-select: none;
+}
+
+.tech-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  padding-right: 1.25rem;
+  will-change: transform;
+}
+
+.tech-marquee-left .tech-marquee-track {
+  animation: techMarqueeLeft 28s linear infinite;
+}
+
+.tech-marquee-right .tech-marquee-track {
+  animation: techMarqueeRight 30s linear infinite;
+}
+
+/* Continuously loops without stopping on hover */
+.tech-marquee-container:hover .tech-marquee-track {
+  animation-play-state: running;
+}
+
+@keyframes techMarqueeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes techMarqueeRight {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Badge Pills */
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  height: 44px;
+  padding: 0 1.3rem;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tech-pill:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  filter: brightness(1.1);
+}
+
+.tech-pill svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Individual Tech Colors (matching the screenshot) */
+.pill-react {
+  background: linear-gradient(135deg, #1b384c 0%, #38bdf8 100%);
+  color: #042f2e;
+}
+.pill-react svg {
+  fill: #082f49;
+}
+
+.pill-typescript {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.pill-inertia {
+  background: #9333ea;
+  color: #ffffff;
+}
+
+.pill-tailwind {
+  background: #06b6d4;
+  color: #ffffff;
+}
+
+.pill-laravel {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.pill-figma {
+  background: linear-gradient(135deg, #2d1b4e 0%, #a855f7 100%);
+  color: #ffffff;
+}
+
+.pill-javascript {
+  background: #eab308;
+  color: #000000;
+}
+.pill-javascript svg {
+  fill: #000000;
+}
+
+.pill-gsap {
+  background: #84cc16;
+  color: #000000;
+}
+.pill-gsap svg {
+  fill: #000000;
+}
+
+.pill-mysql {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.pill-git {
+  background: #ea580c;
+  color: #ffffff;
+}
+
+.pill-photoshop {
+  background: #0369a1;
+  color: #ffffff;
+}
+
+.pill-canva {
+  background: #0891b2;
+  color: #ffffff;
+}
+
+.pill-capcut {
+  background: #18181b;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+  .tech-pill {
+    height: 38px;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
+  .tech-pill svg {
+    width: 16px;
+    height: 16px;
+  }
+  .tech-marquee-container {
+    gap: 0.85rem;
+    margin: 2rem 0 1rem 0;
+  }
+}
+
+/* ==========================================================================
+   GITHUB REAL-TIME ACTIVITY HEATMAP (CLEAN & CENTERED)
+   ========================================================================== */
+.github-contrib-container {
+  margin-top: 4.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.github-contrib-card {
+  width: 100%;
+  max-width: 960px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 2.2rem 2.6rem;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
   overflow: hidden;
 }
 
-[data-theme="light"] .bento-card {
-  background: rgba(255, 255, 255, 0.6);
-  border-color: rgba(0, 0, 0, 0.07);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+[data-theme="light"] .github-contrib-card {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
 }
 
-.bento-card.bento-featured {
-  grid-column: span 2;
-  background: linear-gradient(135deg, rgba(0, 136, 204, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border-color: rgba(0, 136, 204, 0.25);
+.github-contrib-card:hover {
+  border-color: rgba(0, 136, 204, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 0 25px rgba(0, 136, 204, 0.1);
 }
 
-[data-theme="light"] .bento-card.bento-featured {
-  background: linear-gradient(135deg, rgba(0, 110, 157, 0.06) 0%, rgba(255, 255, 255, 0.8) 100%);
-  border-color: rgba(0, 110, 157, 0.2);
+[data-theme="light"] .github-contrib-card:hover {
+  border-color: rgba(0, 110, 157, 0.3);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08), 0 0 25px rgba(0, 110, 157, 0.08);
 }
 
-.bento-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(0, 136, 204, 0.16) 0%, transparent 60%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-
-.bento-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(0, 136, 204, 0.45);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 0 25px rgba(0, 136, 204, 0.15);
-}
-
-[data-theme="light"] .bento-card:hover {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 0 0 25px rgba(0, 110, 157, 0.1);
-}
-
-.bento-card:hover .bento-glow {
-  opacity: 1;
-}
-
-.bento-card-top {
+.github-contrib-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
-.tech-icon {
-  width: 58px;
-  height: 58px;
+.github-contrib-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.github-contrib-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.05);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
+  color: var(--text-primary);
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
 }
 
-[data-theme="light"] .tech-icon {
+[data-theme="light"] .github-contrib-icon {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.bento-card:hover .tech-icon {
-  transform: scale(1.12) rotate(5deg);
-  background: rgba(0, 136, 204, 0.15);
-  border-color: rgba(0, 136, 204, 0.4);
+.github-contrib-card:hover .github-contrib-icon {
+  transform: scale(1.08) rotate(4deg);
+  color: var(--accent-color);
 }
 
-.tech-icon svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+.github-contrib-icon svg {
+  width: 26px;
+  height: 26px;
 }
 
-.tech-badge {
-  display: none !important;
-}
-
-.cat-design {
-  background: rgba(242, 78, 30, 0.12);
-  color: #FF5D38;
-  border: 1px solid rgba(242, 78, 30, 0.3);
-  box-shadow: 0 2px 10px rgba(242, 78, 30, 0.15);
-}
-
-.cat-frontend {
-  background: rgba(56, 189, 248, 0.12);
-  color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
-}
-
-.cat-backend {
-  background: rgba(255, 45, 32, 0.12);
-  color: #FF3B30;
-  border: 1px solid rgba(255, 45, 32, 0.3);
-  box-shadow: 0 2px 10px rgba(255, 45, 32, 0.15);
-}
-
-.cat-animation {
-  background: rgba(136, 206, 2, 0.12);
-  color: #9DE500;
-  border: 1px solid rgba(136, 206, 2, 0.3);
-  box-shadow: 0 2px 10px rgba(136, 206, 2, 0.15);
-}
-
-.bento-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.bento-title {
-  font-size: 1.6rem;
-  font-weight: 600;
+.github-contrib-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
   letter-spacing: -0.01em;
 }
 
-.bento-desc {
-  font-size: 0.92rem;
-  line-height: 1.6;
+.gh-count-num {
+  color: var(--accent-color);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+
+.github-contrib-sub {
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  margin: 0;
-  opacity: 0.88;
+  margin: 0.25rem 0 0 0;
+  opacity: 0.85;
 }
 
-/* Hidden Bento Item Filter State */
-.bento-card.filtered-out {
-  display: none !important;
+.github-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .bento-card.bento-featured {
-    grid-column: span 2;
-  }
+[data-theme="light"] .github-user-pill {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.09);
 }
 
-@media (max-width: 640px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
+.github-user-pill:hover {
+  background: var(--accent-color);
+  color: #ffffff !important;
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 110, 157, 0.35);
+}
+
+.gh-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #39d353;
+  box-shadow: 0 0 8px #39d353;
+  animation: ghPulse 2s infinite ease-in-out;
+}
+
+@keyframes ghPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Heatmap Calendar Scroll & Grid */
+.github-calendar-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.8rem 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+[data-theme="light"] .github-calendar-scroll {
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.github-calendar-inner {
+  display: flex;
+  justify-content: center;
+  min-width: 725px;
+  margin: 0 auto;
+}
+
+.github-calendar-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 120px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.gh-pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  animation: ghPulse 1.2s infinite ease-in-out;
+}
+
+/* SVG Calendar Elements */
+.gh-calendar-svg {
+  display: block;
+  overflow: visible;
+}
+
+.gh-month-label {
+  fill: var(--text-secondary);
+  font-size: 10px;
+  font-family: var(--font-main);
+  opacity: 0.75;
+}
+
+.gh-day-label {
+  fill: var(--text-secondary);
+  font-size: 9px;
+  font-family: var(--font-main);
+  opacity: 0.65;
+  text-anchor: start;
+}
+
+.gh-day-cell {
+  shape-rendering: geometricPrecision;
+  transition: transform 0.15s ease, stroke 0.15s ease, filter 0.15s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.gh-day-cell:hover {
+  stroke: #ffffff;
+  stroke-width: 1.2px;
+  stroke-opacity: 0.9;
+  filter: brightness(1.2);
+}
+
+[data-theme="light"] .gh-day-cell:hover {
+  stroke: #1a1a1a;
+  stroke-opacity: 0.8;
+}
+
+/* Levels (Dark Theme Default) */
+.gh-day-cell.level-0,
+.legend-cell.level-0 {
+  fill: #161b22;
+  background-color: #161b22;
+}
+
+.gh-day-cell.level-1,
+.legend-cell.level-1 {
+  fill: #0e4429;
+  background-color: #0e4429;
+}
+
+.gh-day-cell.level-2,
+.legend-cell.level-2 {
+  fill: #006d32;
+  background-color: #006d32;
+}
+
+.gh-day-cell.level-3,
+.legend-cell.level-3 {
+  fill: #26a641;
+  background-color: #26a641;
+}
+
+.gh-day-cell.level-4,
+.legend-cell.level-4 {
+  fill: #39d353;
+  background-color: #39d353;
+}
+
+/* Levels (Light Theme) */
+[data-theme="light"] .gh-day-cell.level-0,
+[data-theme="light"] .legend-cell.level-0 {
+  fill: #ebedf0;
+  background-color: #ebedf0;
+}
+
+[data-theme="light"] .gh-day-cell.level-1,
+[data-theme="light"] .legend-cell.level-1 {
+  fill: #9be9a8;
+  background-color: #9be9a8;
+}
+
+[data-theme="light"] .gh-day-cell.level-2,
+[data-theme="light"] .legend-cell.level-2 {
+  fill: #40c463;
+  background-color: #40c463;
+}
+
+[data-theme="light"] .gh-day-cell.level-3,
+[data-theme="light"] .legend-cell.level-3 {
+  fill: #30a14e;
+  background-color: #30a14e;
+}
+
+[data-theme="light"] .gh-day-cell.level-4,
+[data-theme="light"] .legend-cell.level-4 {
+  fill: #216e39;
+  background-color: #216e39;
+}
+
+/* Footer & Legend */
+.github-contrib-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] .github-contrib-footer {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.github-live-tag {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.github-live-tag:hover {
+  color: var(--accent-color);
+}
+
+.github-legend-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.legend-cells {
+  display: flex;
+  align-items: center;
+  gap: 3.5px;
+}
+
+.legend-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2.5px;
+  display: inline-block;
+}
+
+/* Floating Tooltip */
+.gh-tooltip {
+  position: fixed;
+  z-index: 999999;
+  background: #24292f;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-family: var(--font-main);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translate(-50%, -100%) translateY(-8px);
+  transition: opacity 0.15s ease;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gh-tooltip strong {
+  color: #39d353;
+  font-weight: 600;
+}
+
+[data-theme="light"] .gh-tooltip {
+  background: #1f2328;
+}
+
+@media (max-width: 768px) {
+  .github-contrib-card {
+    padding: 1.6rem 1.4rem;
+    border-radius: 22px;
   }
-  .bento-card.bento-featured {
-    grid-column: span 1;
+  .github-contrib-heading {
+    font-size: 1.1rem;
+    flex-wrap: wrap;
   }
-  .tech-filters {
-    gap: 0.5rem;
-  }
-  .tech-filter-btn {
-    padding: 0.55rem 1.1rem;
-    font-size: 0.85rem;
+  .gh-count-num {
+    font-size: 1.35rem;
   }
 }
 

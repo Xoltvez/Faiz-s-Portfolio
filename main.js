@@ -1065,6 +1065,244 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- GITHUB REAL-TIME ACTIVITY HEATMAP ---
+  function initGitHubContributions() {
+    const calendarContainer = document.getElementById("github-calendar-inner");
+    const totalCountEl = document.getElementById("gh-total-count");
+    if (!calendarContainer || !totalCountEl) return;
+
+    const USERNAME = "Xoltvez";
+    const CACHE_KEY = `gh_contributions_${USERNAME}`;
+    const CACHE_TTL = 30 * 60 * 1000; // 30 minutes cache
+
+    let cachedData = null;
+    try {
+      const raw = sessionStorage.getItem(CACHE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Date.now() - parsed.timestamp < CACHE_TTL) {
+          cachedData = parsed.data;
+        }
+      }
+    } catch (e) {}
+
+    // Month names
+    const getMonthNames = (lang) => {
+      return lang === "id"
+        ? ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+        : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    };
+
+    // Day labels
+    const getDayLabels = (lang) => {
+      return lang === "id"
+        ? { 1: "Sen", 3: "Rab", 5: "Jum" }
+        : { 1: "Mon", 3: "Wed", 5: "Fri" };
+    };
+
+    // Format date string
+    const formatDate = (dateStr, lang) => {
+      try {
+        const parts = dateStr.split("-");
+        const y = parts[0];
+        const mIdx = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        const mName = getMonthNames(lang)[mIdx] || "";
+        return lang === "id" ? `${d} ${mName} ${y}` : `${mName} ${d}, ${y}`;
+      } catch (e) {
+        return dateStr;
+      }
+    };
+
+    // Tooltip singleton
+    let tooltip = document.querySelector(".gh-tooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.className = "gh-tooltip";
+      document.body.appendChild(tooltip);
+    }
+
+    let activeContributionsData = null;
+
+    function renderHeatmap(data) {
+      activeContributionsData = data;
+      const currentLang = getSavedLanguage();
+      const monthNames = getMonthNames(currentLang);
+      const dayLabels = getDayLabels(currentLang);
+
+      // Compute total count
+      const total =
+        data.total?.lastYear ??
+        data.contributions.reduce((acc, c) => acc + (c.count || 0), 0);
+
+      // Animate total count number
+      let start = 0;
+      const target = total;
+      const duration = 1000;
+      const startTime = performance.now();
+      const animateCount = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        totalCountEl.textContent = current.toLocaleString();
+        if (progress < 1) {
+          requestAnimationFrame(animateCount);
+        } else {
+          totalCountEl.textContent = target.toLocaleString();
+        }
+      };
+      requestAnimationFrame(animateCount);
+
+      // Group into weeks (Sunday to Saturday)
+      const contributions = data.contributions || [];
+      if (contributions.length === 0) return;
+
+      const weeks = [];
+      let currentWeek = [];
+
+      contributions.forEach((c) => {
+        const d = new Date(c.date + "T00:00:00");
+        const dayOfWeek = d.getDay(); // 0 = Sun ... 6 = Sat
+        if (dayOfWeek === 0 && currentWeek.length > 0) {
+          weeks.push(currentWeek);
+          currentWeek = [];
+        }
+        currentWeek.push({ ...c, dayOfWeek, d });
+      });
+      if (currentWeek.length > 0) {
+        weeks.push(currentWeek);
+      }
+
+      // Calculate SVG dimensions
+      const numWeeks = weeks.length;
+      const cellSize = 10;
+      const cellGap = 3;
+      const leftMargin = 32;
+      const topMargin = 22;
+      const svgWidth = leftMargin + numWeeks * (cellSize + cellGap) + 10;
+      const svgHeight = topMargin + 7 * (cellSize + cellGap) + 8;
+
+      let svgHTML = `<svg class="gh-calendar-svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">`;
+
+      // Render Day Labels (Mon, Wed, Fri)
+      [1, 3, 5].forEach((dayIdx) => {
+        const y = topMargin + dayIdx * (cellSize + cellGap) + cellSize - 1;
+        const labelText = dayLabels[dayIdx] || "";
+        svgHTML += `<text class="gh-day-label" x="4" y="${y}">${labelText}</text>`;
+      });
+
+      // Render Month Labels & Cells
+      let lastMonthIdx = -1;
+      let lastMonthCol = -99;
+
+      weeks.forEach((week, colIdx) => {
+        const colX = leftMargin + colIdx * (cellSize + cellGap);
+
+        // Check month label
+        const firstDayOfWeek = week[0]?.d;
+        if (firstDayOfWeek) {
+          const mIdx = firstDayOfWeek.getMonth();
+          if (mIdx !== lastMonthIdx && colIdx - lastMonthCol >= 3) {
+            lastMonthIdx = mIdx;
+            lastMonthCol = colIdx;
+            const mName = monthNames[mIdx];
+            svgHTML += `<text class="gh-month-label" x="${colX}" y="12">${mName}</text>`;
+          }
+        }
+
+        // Render day cells
+        week.forEach((day) => {
+          const rowY = topMargin + day.dayOfWeek * (cellSize + cellGap);
+          const lvl = Math.max(0, Math.min(4, day.level || (day.count > 0 ? 1 : 0)));
+          svgHTML += `<rect class="gh-day-cell level-${lvl}" x="${colX}" y="${rowY}" width="${cellSize}" height="${cellSize}" rx="2.5" data-date="${day.date}" data-count="${day.count}"></rect>`;
+        });
+      });
+
+      svgHTML += `</svg>`;
+      calendarContainer.innerHTML = svgHTML;
+
+      // Tooltip positioning & events
+      const rects = calendarContainer.querySelectorAll(".gh-day-cell");
+      rects.forEach((rect) => {
+        rect.addEventListener("mouseenter", (e) => {
+          const count = parseInt(rect.getAttribute("data-count"), 10) || 0;
+          const dateStr = rect.getAttribute("data-date");
+          const lang = getSavedLanguage();
+          const formatted = formatDate(dateStr, lang);
+          const t = translations[lang]?.github || translations.en.github;
+
+          let text = "";
+          if (count === 0) {
+            text = `${t.no_contrib} ${formatted}`;
+          } else if (count === 1) {
+            text = `<strong>1 ${t.contrib_single}</strong> ${formatted}`;
+          } else {
+            text = `<strong>${count} ${t.contrib_plural}</strong> ${formatted}`;
+          }
+
+          tooltip.innerHTML = text;
+          tooltip.style.opacity = "1";
+          positionTooltip(e);
+        });
+
+        rect.addEventListener("mousemove", (e) => {
+          positionTooltip(e);
+        });
+
+        rect.addEventListener("mouseleave", () => {
+          tooltip.style.opacity = "0";
+        });
+      });
+
+      function positionTooltip(e) {
+        tooltip.style.left = `${e.clientX}px`;
+        tooltip.style.top = `${e.clientY}px`;
+      }
+    }
+
+    if (cachedData) {
+      renderHeatmap(cachedData);
+    }
+
+    // Live fetch from GitHub contributions API
+    fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.contributions) {
+          try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
+          } catch (e) {}
+          renderHeatmap(data);
+        }
+      })
+      .catch((err) => {
+        console.warn("GitHub live contributions fetch notice:", err);
+        if (!cachedData) {
+          calendarContainer.innerHTML = `
+            <div class="github-calendar-loader">
+              <a href="https://github.com/${USERNAME}" target="_blank" class="github-user-pill">
+                <span>View @${USERNAME} on GitHub ↗</span>
+              </a>
+            </div>
+          `;
+          totalCountEl.textContent = "700+";
+        }
+      });
+
+    // Language switch listener
+    window.addEventListener("languageChanged", () => {
+      if (activeContributionsData) {
+        renderHeatmap(activeContributionsData);
+      }
+    });
+  }
+
+  // Initialize GitHub Activity
+  initGitHubContributions();
+
   // Refresh ScrollTrigger after all resources/images are loaded
   window.addEventListener("load", () => {
     ScrollTrigger.refresh();
