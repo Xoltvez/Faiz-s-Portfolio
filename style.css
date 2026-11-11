@@ -2645,8 +2645,9 @@ a {
 }
 
 .pill-photoshop {
-  background: #0369a1;
-  color: #ffffff;
+  background: #001e36;
+  color: #31a8ff;
+  border: 1px solid rgba(49, 168, 255, 0.35);
 }
 
 .pill-canva {
